@@ -1,103 +1,132 @@
+<div align="center">
+
+<img src="lib/assets/logo.png" alt="Logotipo de Cintli Montessori" width="128">
+
 # Cintli Montessori
+
+### Plataforma escolar multiplataforma para familias, docentes y administración
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
-![Platforms](https://img.shields.io/badge/Platforms-iOS%20%7C%20Android%20%7C%20Web-0073DB?style=flat-square)
-![License](https://img.shields.io/badge/License-Proprietary-FF5E52?style=flat-square)
+![Platforms](https://img.shields.io/badge/iOS%20%7C%20Android%20%7C%20Web-0073DB?style=flat-square)
+![Status](https://img.shields.io/badge/Estado-Preproducción-F59E0B?style=flat-square)
+![License](https://img.shields.io/badge/Licencia-Propietaria-E11D48?style=flat-square)
 
-Sistema escolar compuesto por una aplicación móvil para familias y docentes y un panel web para la administración institucional. El proyecto evolucionó de un prototipo académico a una base modular orientada a producción, con control de acceso por rol, datos en tiempo real y una interfaz adaptable.
+</div>
 
-> Este repositorio público no contiene credenciales, cuentas de servicio, archivos de configuración Firebase por plataforma ni datos personales de la institución. Las configuraciones locales y de producción deben generarse de forma independiente.
+## Visión general
 
-## Estado del proyecto
+Cintli Montessori es un sistema de gestión escolar compuesto por una aplicación móvil para familias y docentes y un panel administrativo desarrollado con Flutter Web. Centraliza comunicación, calendario, directorio académico, evaluaciones y operación institucional mediante una arquitectura modular conectada a Firebase.
 
-- **Aplicación móvil:** `0.9.0+1`
-- **Panel administrativo web:** `0.7.0+1`
-- **Etapa:** preproducción y validación funcional
-- **Administración móvil:** deshabilitada; la gestión escolar se concentra en web
-- **Notificaciones push:** planeadas, no activas
-- **Firebase Storage:** integración futura para imágenes y documentos
+El proyecto evolucionó de un prototipo académico a una base orientada a producción. Su diseño prioriza experiencia adaptable, control de acceso por rol, separación de responsabilidades y aislamiento de la información por institución.
 
-## Productos incluidos
+> Este repositorio es una versión pública de portafolio. No contiene credenciales, configuraciones Firebase por plataforma, cuentas de servicio ni datos personales de estudiantes, familias o personal.
+
+## Alcance actual
+
+| Producto | Usuarios | Capacidades principales | Versión |
+| --- | --- | --- | --- |
+| Aplicación móvil | Familias y docentes | Noticias, calendario, directorio, boletas, estadísticas, evaluaciones y configuración | `0.9.0+1` |
+| Panel administrativo web | Personal autorizado | Dashboard, noticias, calendario, grupos, materias, alumnos, familias y profesores | `0.7.0+1` |
+
+**Etapa:** preproducción y validación funcional.
+
+La administración móvil permanece deshabilitada; la gestión institucional se concentra en el panel web. Las notificaciones push y Firebase Storage forman parte del roadmap y no se presentan como funciones activas.
+
+## Capacidades destacadas
 
 ### Aplicación móvil
 
-- Acceso con Firebase Authentication y perfil Firestore observado en tiempo real.
-- Experiencia diferenciada para familia y docente.
-- Noticias y calendario filtrados por audiencia escolar o grupos asignados.
-- Boletas, estadísticas y consulta por trimestre.
-- Evaluaciones docentes restringidas a grupos, alumnos y materias válidos.
-- Actualizaciones automáticas mediante streams de Cloud Firestore.
-- Modo claro y oscuro, diseño adaptable para iOS y Android e iconografía Lucide.
-- Estados de carga con skeleton y control de conectividad.
-- Recuperación de contraseña y mensajes de acceso inactivo.
+- Autenticación con Firebase y perfil de usuario observado en tiempo real.
+- Experiencias diferenciadas para familias y docentes.
+- Noticias y calendario filtrados por audiencia y grupos relacionados.
+- Consulta de boletas, estadísticas y periodos académicos.
+- Registro docente de evaluaciones dentro de grupos y materias autorizados.
+- Modo claro y oscuro con preferencia persistente.
+- Layout adaptable para iOS y Android.
+- Estados de carga, manejo de conectividad y mensajes de error para el usuario.
+- Recuperación de contraseña y control de cuentas inactivas.
 
 ### Panel administrativo web
 
-- Resumen operativo con métricas en tiempo real.
+- Dashboard con indicadores operativos.
 - Gestión de noticias, audiencias, expiración y archivado.
-- Gestión de calendario, fechas, horarios y grupos destinatarios.
-- Administración de grupos, materias, alumnos, familias y profesores.
-- Aprovisionamiento de cuentas Firebase Auth para familias y docentes.
-- Vinculación de profesores con grupos y de familias con alumnos.
-- Activación, inactivación, archivado y confirmaciones para acciones críticas.
-- Preferencia de sesión y tema claro, oscuro o del sistema.
-- Formularios, filtros, selectores y feedback diseñados para escritorio.
+- Administración de calendario, fechas, horarios y grupos destinatarios.
+- Gestión de grupos, materias, alumnos, familias y profesores.
+- Vinculación de docentes con grupos y de familias con estudiantes.
+- Aprovisionamiento controlado de cuentas Firebase Authentication.
+- Activación, inactivación y confirmaciones para acciones críticas.
+- Tema claro, oscuro o basado en el sistema.
+- Formularios y componentes diseñados para operación en escritorio.
 
 ## Arquitectura
 
-El código utiliza una organización modular por funcionalidad:
+```mermaid
+flowchart LR
+    UI["Flutter Mobile / Flutter Web"] --> State["Controllers y Provider"]
+    State --> Repo["Repositories"]
+    Repo --> Auth["Firebase Authentication"]
+    Repo --> DB["Cloud Firestore"]
+    Repo --> Local["SharedPreferences"]
+```
+
+La aplicación sigue una organización modular por funcionalidad:
 
 ```text
 lib/
-|- admin_web/            Panel administrativo, repositorios y tema web
-|- core/                 Configuración, conectividad, layout, tema y widgets
-|- features/
-|  |- academics/         Periodos, materias y evaluaciones
-|  |- auth/              Sesión, perfiles y recuperación de acceso
-|  |- calendar/          Eventos y audiencias
-|  |- directory/         Grupos, alumnos y profesores
-|  `- news/              Comunicados y audiencias
-`- screens/              Composición de pantallas móviles
+├── admin_web/            Panel administrativo, datos, presentación y tema
+├── core/                 Configuración, conectividad, layout, tema y widgets
+├── features/
+│   ├── academics/        Periodos, materias y evaluaciones
+│   ├── auth/             Sesión, perfiles y recuperación de acceso
+│   ├── calendar/         Eventos y audiencias
+│   ├── directory/        Grupos, estudiantes y profesores
+│   └── news/             Comunicados y audiencias
+├── screens/              Composición de pantallas móviles
+└── main.dart             Punto de entrada de la aplicación móvil
 ```
 
-Flujo principal:
+El panel administrativo utiliza un punto de entrada independiente:
 
 ```text
-Pantalla -> Controller / Provider -> Repository -> Firebase SDK
-                                             -> Authentication
-                                             -> Cloud Firestore
+lib/admin_web/main_admin.dart
 ```
 
-Los datos institucionales se organizan bajo `schools/{schoolId}`. Las reglas de Firestore validan autenticación, estado activo, rol, pertenencia a grupos, vinculación familiar y estructura de cada escritura.
+### Decisiones técnicas
+
+- **Cloud Firestore como fuente principal:** los módulos activos consumen colecciones y streams de Firestore.
+- **Separación por institución:** la información se organiza bajo `schools/{schoolId}`.
+- **Acceso por rol:** los perfiles y reglas contemplan usuarios autorizados, estado de cuenta y relaciones con grupos o estudiantes.
+- **Repositorios desacoplados:** la interfaz depende de controladores y contratos de datos, no de consultas dispersas en los widgets.
+- **Dos superficies, un stack:** móvil y administración comparten Flutter, Dart, modelos y criterios visuales.
 
 ## Stack tecnológico
 
 | Área | Tecnología |
 | --- | --- |
-| Aplicación móvil | Flutter y Dart |
-| Panel web | Flutter Web |
+| Móvil | Flutter y Dart |
+| Administración | Flutter Web |
 | Autenticación | Firebase Authentication |
-| Base de datos principal | Cloud Firestore |
-| Gestión de estado | Provider |
-| Persistencia local | SharedPreferences |
+| Datos | Cloud Firestore |
+| Estado | Provider |
+| Preferencias | SharedPreferences |
 | Calendario | table_calendar |
-| Iconografía | lucide_flutter |
-| Carga visual | skeletonizer |
 | Conectividad | connectivity_plus |
 | Localización | intl y flutter_localizations |
+| Interfaz | Material Design, lucide_flutter y skeletonizer |
 
-`firebase_database`, `firebase_storage` e `image_picker` permanecen como dependencias de transición o preparación futura. Cloud Firestore es la fuente principal de los módulos productivos actuales.
+`firebase_database`, `firebase_storage` e `image_picker` permanecen como dependencias de transición o preparación futura. Su presencia no implica que esos servicios formen parte de todos los flujos productivos actuales.
 
 ## Configuración local segura
 
 ### Requisitos
 
-- Flutter compatible con Dart `^3.7.2`
-- Proyecto Firebase propio
-- FlutterFire CLI y Firebase CLI
-- Xcode para iOS y Android Studio para Android
+- Flutter compatible con Dart `^3.7.2`.
+- Xcode para desarrollo iOS.
+- Android Studio para desarrollo Android.
+- Un proyecto Firebase propio.
+- FlutterFire CLI y Firebase CLI.
 
 ### Preparación
 
@@ -106,7 +135,7 @@ flutter pub get
 flutterfire configure
 ```
 
-`flutterfire configure` debe generar localmente los siguientes archivos, excluidos del repositorio:
+`flutterfire configure` debe generar localmente los archivos excluidos del repositorio:
 
 ```text
 android/app/google-services.json
@@ -116,7 +145,7 @@ lib/core/config/firebase_options.dart
 .firebaserc
 ```
 
-No deben sustituirse por archivos reales dentro de commits públicos.
+No deben añadirse configuraciones reales, llaves privadas o cuentas de servicio a commits públicos.
 
 ### Ejecutar la aplicación móvil
 
@@ -130,7 +159,7 @@ flutter run
 flutter run -d chrome -t lib/admin_web/main_admin.dart
 ```
 
-## Firebase
+## Firebase y seguridad
 
 El repositorio conserva únicamente artefactos públicos y revisables:
 
@@ -140,9 +169,11 @@ El repositorio conserva únicamente artefactos públicos y revisables:
 - `firebase.json` sin identificadores de proyecto
 - `.firebaserc.example`
 
-Las reglas no sustituyen la configuración de Firebase Authentication, App Check, presupuestos, alertas ni políticas operativas requeridas antes de producción.
+La seguridad no depende únicamente de validaciones visuales. Antes de producción deben configurarse y validarse reglas, App Check, entornos separados, respaldos, alertas de consumo y permisos con Firebase Emulator Suite.
 
-## Calidad y validación
+## Calidad
+
+Comandos principales de validación:
 
 ```bash
 flutter analyze
@@ -150,46 +181,43 @@ flutter test
 flutter build web --release -t lib/admin_web/main_admin.dart
 ```
 
-Antes de publicar también se debe verificar:
+La revisión previa a publicación debe incluir:
 
 - ausencia de secretos y configuraciones locales;
-- permisos de Firestore mediante Emulator Suite;
-- navegación por roles y cuentas inactivas;
-- sincronización en tiempo real;
-- layouts móviles y web en diferentes resoluciones;
-- consistencia de versiones móvil y web.
+- pruebas de reglas con usuarios y roles ficticios;
+- navegación para familias, docentes y cuentas inactivas;
+- sincronización de streams y estados sin conexión;
+- layouts móviles y web en múltiples resoluciones;
+- consistencia del versionado móvil y administrativo.
 
-## Cambios principales respecto al prototipo
+## Privacidad
 
-- Migración progresiva de módulos escolares hacia Cloud Firestore.
-- Separación del panel administrativo web y la aplicación móvil.
-- Administración móvil retirada del flujo principal.
-- Directorio, noticias, calendario y evaluaciones con streams en tiempo real.
-- Modelo de usuarios con roles, estados, grupos y alumnos vinculados.
-- Reglas Firestore endurecidas por recurso y audiencia.
-- Interfaz móvil y web rediseñada con soporte responsive y modo oscuro.
-- Eliminación temporal del centro de notificaciones hasta integrar FCM.
-- Versionado independiente para app y panel web.
+- No se deben registrar datos reales de estudiantes en issues, pruebas o commits.
+- Las cuentas de servicio nunca deben integrarse en Flutter ni publicarse.
+- Los documentos operativos internos se mantienen fuera del repositorio.
+- Las demostraciones deben utilizar información ficticia.
+- Los hallazgos de seguridad deben comunicarse de forma privada.
 
-## Próximas etapas
+Las capturas de entornos institucionales no se incluyen públicamente para evitar exponer identidades, datos académicos o configuraciones del cliente.
+
+## Roadmap
 
 - Completar pruebas integrales con Firebase Emulator Suite.
 - Definir App Check, monitoreo, respaldos y alertas de consumo.
-- Incorporar backend privilegiado para deshabilitar o eliminar cuentas Auth.
-- Habilitar Storage cuando exista una política de costos y contenido.
+- Incorporar un backend privilegiado para operaciones administrativas sobre cuentas Auth.
+- Habilitar Storage cuando exista una política de contenido, privacidad y costos.
 - Integrar Firebase Cloud Messaging después de definir consentimiento y audiencias.
-- Preparar distribución cerrada en TestFlight y Google Play Testing.
-- Realizar pruebas de aceptación con datos ficticios antes del ciclo escolar.
+- Preparar distribución cerrada mediante TestFlight y Google Play Testing.
+- Ejecutar pruebas de aceptación con datos completamente ficticios.
 
-## Seguridad y privacidad
+## Autor y contacto
 
-- No deben registrarse datos reales de estudiantes en issues, pruebas o commits.
-- Las cuentas de servicio nunca deben usarse desde Flutter ni publicarse.
-- Los documentos técnicos internos se mantienen fuera del repositorio público.
-- Cualquier hallazgo de seguridad debe comunicarse de forma privada al titular.
+Diseño, arquitectura y desarrollo por [Luis Cruz](https://github.com/cruzlcdev).
+
+Para proyectos, colaboración profesional o contratación: [luisitprivt@gmail.com](mailto:luisitprivt@gmail.com).
 
 ## Licencia
 
 Copyright (c) 2026 Luisdev. Todos los derechos reservados.
 
-Este software es propietario y se publica únicamente con fines demostrativos y de portafolio. Consultar [LICENSE](LICENSE) para conocer las restricciones de uso.
+Este software es propietario y se publica únicamente con fines demostrativos y de portafolio. Consulta [LICENSE](LICENSE) para conocer las restricciones de uso.
