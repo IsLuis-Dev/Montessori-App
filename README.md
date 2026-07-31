@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="lib/assets/logo.png" alt="Logotipo de Cintli Montessori" width="128">
+<img src="lib/assets/icons/Propuesta_logo_2.png" alt="Propuesta de identidad visual de Cintli Montessori" width="420">
+
+<sub>Propuesta de identidad visual</sub>
 
 # Cintli Montessori
 
@@ -17,11 +19,18 @@
 
 ## Visión general
 
-Cintli Montessori es un sistema de gestión escolar compuesto por una aplicación móvil para familias y docentes y un panel administrativo desarrollado con Flutter Web. Centraliza comunicación, calendario, directorio académico, evaluaciones y operación institucional mediante una arquitectura modular conectada a Firebase.
+Cintli Montessori es una plataforma de gestión escolar compuesta por dos experiencias complementarias: una aplicación móvil para familias y docentes, y un panel administrativo desarrollado con Flutter Web. Centraliza comunicación, calendario, seguimiento académico y operación institucional mediante una arquitectura modular conectada a Firebase.
 
 El proyecto evolucionó de un prototipo académico a una base orientada a producción. Su diseño prioriza experiencia adaptable, control de acceso por rol, separación de responsabilidades y aislamiento de la información por institución.
 
 > Este repositorio es una versión pública de portafolio. No contiene credenciales, configuraciones Firebase por plataforma, cuentas de servicio ni datos personales de estudiantes, familias o personal.
+
+### Qué resuelve
+
+- Reúne comunicados, eventos y seguimiento académico en un solo canal institucional.
+- Ofrece a familias y docentes información acorde con su rol y sus relaciones escolares.
+- Proporciona al personal autorizado una superficie web para administrar la operación académica.
+- Mantiene los datos separados por institución y protegidos mediante autenticación y reglas de acceso.
 
 ## Alcance actual
 
@@ -32,7 +41,15 @@ El proyecto evolucionó de un prototipo académico a una base orientada a produc
 
 **Etapa:** preproducción y validación funcional.
 
-La administración móvil permanece deshabilitada; la gestión institucional se concentra en el panel web. Las notificaciones push y Firebase Storage forman parte del roadmap y no se presentan como funciones activas.
+La administración móvil permanece deshabilitada; la gestión institucional se concentra en el panel web. Las notificaciones push forman parte del roadmap y no se presentan como una función activa.
+
+## Experiencia por perfil
+
+| Perfil | Acceso | Flujo principal |
+| --- | --- | --- |
+| Familia | Aplicación móvil | Iniciar sesión, consultar comunicados y calendario, revisar estudiantes vinculados, boletas y estadísticas |
+| Docente | Aplicación móvil | Iniciar sesión, consultar grupos y materias asignadas, registrar evaluaciones y dar seguimiento académico |
+| Administración | Panel web | Gestionar contenido, calendario, grupos, materias, estudiantes, familias, docentes y estado de cuentas |
 
 ## Capacidades destacadas
 
@@ -52,6 +69,7 @@ La administración móvil permanece deshabilitada; la gestión institucional se 
 
 - Dashboard con indicadores operativos.
 - Gestión de noticias, audiencias, expiración y archivado.
+- Carga de imágenes de noticias mediante Firebase Storage.
 - Administración de calendario, fechas, horarios y grupos destinatarios.
 - Gestión de grupos, materias, alumnos, familias y profesores.
 - Vinculación de docentes con grupos y de familias con estudiantes.
@@ -64,11 +82,13 @@ La administración móvil permanece deshabilitada; la gestión institucional se 
 
 ```mermaid
 flowchart LR
-    UI["Flutter Mobile / Flutter Web"] --> State["Controllers y Provider"]
+    UI["Aplicación móvil / Panel web"] --> State["Controllers y Provider"]
     State --> Repo["Repositories"]
     Repo --> Auth["Firebase Authentication"]
     Repo --> DB["Cloud Firestore"]
+    Repo --> Files["Firebase Storage"]
     Repo --> Local["SharedPreferences"]
+    Legacy["Módulos heredados"] -. transición .-> RTDB["Realtime Database"]
 ```
 
 La aplicación sigue una organización modular por funcionalidad:
@@ -96,6 +116,8 @@ lib/admin_web/main_admin.dart
 ### Decisiones técnicas
 
 - **Cloud Firestore como fuente principal:** los módulos activos consumen colecciones y streams de Firestore.
+- **Storage con alcance definido:** las imágenes de noticias se almacenan bajo rutas protegidas por institución.
+- **Realtime Database en transición:** permanece en un módulo heredado mientras la arquitectura converge en Firestore.
 - **Separación por institución:** la información se organiza bajo `schools/{schoolId}`.
 - **Acceso por rol:** los perfiles y reglas contemplan usuarios autorizados, estado de cuenta y relaciones con grupos o estudiantes.
 - **Repositorios desacoplados:** la interfaz depende de controladores y contratos de datos, no de consultas dispersas en los widgets.
@@ -109,6 +131,8 @@ lib/admin_web/main_admin.dart
 | Administración | Flutter Web |
 | Autenticación | Firebase Authentication |
 | Datos | Cloud Firestore |
+| Archivos | Firebase Storage |
+| Datos heredados | Firebase Realtime Database |
 | Estado | Provider |
 | Preferencias | SharedPreferences |
 | Calendario | table_calendar |
@@ -116,7 +140,7 @@ lib/admin_web/main_admin.dart
 | Localización | intl y flutter_localizations |
 | Interfaz | Material Design, lucide_flutter y skeletonizer |
 
-`firebase_database`, `firebase_storage` e `image_picker` permanecen como dependencias de transición o preparación futura. Su presencia no implica que esos servicios formen parte de todos los flujos productivos actuales.
+Cloud Firestore es la fuente principal de los módulos actuales. Firebase Storage e `image_picker` respaldan el flujo de imágenes de noticias; Realtime Database permanece limitado a código heredado y no representa la dirección principal de la arquitectura.
 
 ## Configuración local segura
 
@@ -190,6 +214,24 @@ La revisión previa a publicación debe incluir:
 - layouts móviles y web en múltiples resoluciones;
 - consistencia del versionado móvil y administrativo.
 
+## Convención de commits
+
+El historial debe comunicar qué cambió, en qué parte del sistema y por qué. Cada commit debe representar un propósito verificable y utilizar una descripción breve con este formato:
+
+```text
+<tipo>(<alcance>): <cambio concreto>
+```
+
+Tipos recomendados: `feat`, `fix`, `refactor`, `docs`, `test`, `build` y `chore`.
+
+```text
+feat(auth): agrega recuperación de contraseña
+fix(calendar): evita guardar eventos duplicados
+docs(readme): aclara arquitectura y configuración local
+```
+
+Cuando el título no sea suficiente, el cuerpo del commit debe explicar el contexto, la decisión tomada y la validación ejecutada. No deben mezclarse cambios funcionales, refactors y documentación sin relación en un mismo commit.
+
 ## Privacidad
 
 - No se deben registrar datos reales de estudiantes en issues, pruebas o commits.
@@ -205,7 +247,7 @@ Las capturas de entornos institucionales no se incluyen públicamente para evita
 - Completar pruebas integrales con Firebase Emulator Suite.
 - Definir App Check, monitoreo, respaldos y alertas de consumo.
 - Incorporar un backend privilegiado para operaciones administrativas sobre cuentas Auth.
-- Habilitar Storage cuando exista una política de contenido, privacidad y costos.
+- Consolidar el flujo de imágenes en Storage con políticas de contenido, privacidad y costos.
 - Integrar Firebase Cloud Messaging después de definir consentimiento y audiencias.
 - Preparar distribución cerrada mediante TestFlight y Google Play Testing.
 - Ejecutar pruebas de aceptación con datos completamente ficticios.
