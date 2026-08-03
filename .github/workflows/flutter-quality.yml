@@ -26,12 +26,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
-        with:
-          channel: stable
-          flutter-version: "3.44.0"
-          cache: true
+      - name: Install verified Flutter SDK
+        shell: bash
+        env:
+          FLUTTER_ARCHIVE: flutter_linux_3.44.0-stable.tar.xz
+          FLUTTER_SHA256: e1ec95e6c550458a34de93580cb85dac24da0e9bedb9bb42811f050ac5a0c7d5
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/$FLUTTER_ARCHIVE" \
+            "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/$FLUTTER_ARCHIVE"
+          echo "$FLUTTER_SHA256  $RUNNER_TEMP/$FLUTTER_ARCHIVE" | sha256sum --check --strict
+          tar --extract --xz --no-same-owner \
+            --file "$RUNNER_TEMP/$FLUTTER_ARCHIVE" \
+            --directory "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/flutter/bin/flutter" --version
 
       - name: Create CI-only Firebase configuration
         shell: bash
