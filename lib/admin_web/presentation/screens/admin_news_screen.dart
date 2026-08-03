@@ -103,7 +103,7 @@ class _AdminNewsScreenState extends State<AdminNewsScreen> {
                       padding: const EdgeInsets.fromLTRB(34, 0, 34, 34),
                       sliver: SliverList.separated(
                         itemCount: visibleNews.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 12),
+                        separatorBuilder: (_, _) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
                           final news = visibleNews[index];
                           return _NewsAdminCard(
