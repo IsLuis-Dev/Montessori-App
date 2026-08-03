@@ -1,0 +1,11 @@
+# Propietario predeterminado de todo el repositorio.
+* @cruzlcdev
+
+# Superficies críticas que siempre deben quedar bajo revisión del propietario.
+/.github/ @cruzlcdev
+/firestore.rules @cruzlcdev
+/storage.rules @cruzlcdev
+/firebase.json @cruzlcdev
+/pubspec.yaml @cruzlcdev
+/android/ @cruzlcdev
+/ios/ @cruzlcdev
