@@ -18,9 +18,9 @@ concurrency:
 
 jobs:
   analyze-and-test:
-    name: Analyze and test
+    name: Analyze, test, and build Android
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository
@@ -46,7 +46,7 @@ jobs:
       - name: Create CI-only Firebase configuration
         shell: bash
         run: |
-          mkdir -p lib/core/config
+          mkdir -p lib/core/config android/app/src/debug
           printf '%s\n' \
             "import 'package:firebase_core/firebase_core.dart';" \
             "" \
@@ -61,6 +61,37 @@ jobs:
             "  );" \
             "}" \
             > lib/core/config/firebase_options.dart
+          printf '%s\n' \
+            '{' \
+            '  "project_info": {' \
+            '    "project_number": "000000000000",' \
+            '    "project_id": "ci-placeholder",' \
+            '    "storage_bucket": "ci-placeholder.appspot.com"' \
+            '  },' \
+            '  "client": [' \
+            '    {' \
+            '      "client_info": {' \
+            '        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",' \
+            '        "android_client_info": {' \
+            '          "package_name": "com.example.prototipo_2"' \
+            '        }' \
+            '      },' \
+            '      "oauth_client": [],' \
+            '      "api_key": [' \
+            '        {' \
+            '          "current_key": "ci-placeholder"' \
+            '        }' \
+            '      ],' \
+            '      "services": {' \
+            '        "appinvite_service": {' \
+            '          "other_platform_oauth_client": []' \
+            '        }' \
+            '      }' \
+            '    }' \
+            '  ],' \
+            '  "configuration_version": "1"' \
+            '}' \
+            > android/app/src/debug/google-services.json
 
       - name: Install dependencies
         run: flutter pub get
@@ -70,3 +101,6 @@ jobs:
 
       - name: Run tests
         run: flutter test --no-pub
+
+      - name: Build Android debug APK
+        run: flutter build apk --debug --no-pub
