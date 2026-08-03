@@ -15,7 +15,6 @@ dependencies:
   cloud_firestore: ^5.6.8
   firebase_core: ^3.13.1
   firebase_database: ^11.3.7
-  lottie: ^2.7.0
   package_info_plus: ^10.2.1
   yaml: ^3.1.3
   
