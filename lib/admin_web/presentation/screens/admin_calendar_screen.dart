@@ -113,7 +113,7 @@ class _AdminCalendarScreenState extends State<AdminCalendarScreen> {
                       padding: const EdgeInsets.fromLTRB(34, 0, 34, 34),
                       sliver: SliverList.separated(
                         itemCount: visibleEvents.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 12),
+                        separatorBuilder: (_, _) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
                           final event = visibleEvents[index];
                           return _CalendarAdminCard(

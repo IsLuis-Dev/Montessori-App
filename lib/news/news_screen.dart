@@ -742,7 +742,7 @@ class _NewsScreenState extends State<NewsScreen> {
       cacheWidth: cacheWidth,
       filterQuality: FilterQuality.medium,
       gaplessPlayback: true,
-      errorBuilder: (_, __, ___) => _buildImageFallback(fallbackColor),
+      errorBuilder: (_, _, _) => _buildImageFallback(fallbackColor),
     );
   }
 }
