@@ -463,7 +463,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       isDarkMode: isDarkMode,
                       title: '3. Uso de los datos',
                       body:
-                          'La información utilizada durante esta fase es exclusivamente para fines de desarrollo y verificación funcional. No se recolecta, comparte ni comercializa ningún dato con terceros. La base de datos está limitada a un entorno de pruebas y no tiene conexión con servidores públicos o productivos.',
+                          'La información escolar utilizada durante esta fase es exclusivamente para fines de desarrollo y verificación funcional. En compilaciones de distribución para Android, la aplicación puede enviar a Firebase Crashlytics información técnica sobre fallos, como la versión de la app, el tipo de dispositivo y el estado de ejecución. Estos reportes se utilizan únicamente para mejorar la estabilidad y no incluyen de forma intencional nombres, correos, datos académicos ni contenido ingresado por los usuarios.',
                     ),
                     _buildPolicySection(
                       isDarkMode: isDarkMode,
@@ -479,6 +479,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           '- La app no se encuentra en producción.\n'
                           '- Los únicos datos reales utilizados son los nombres.\n'
                           '- No se recopilan datos sensibles o privados.\n'
+                          '- Las versiones de distribución para Android pueden enviar reportes técnicos de fallos a Firebase Crashlytics.\n'
                           '- La información no será utilizada con fines ajenos al desarrollo del sistema.',
                     ),
                     _buildPolicySection(

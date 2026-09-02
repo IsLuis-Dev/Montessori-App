@@ -25,6 +25,7 @@ import 'core/theme/colors.dart'; // Manejo de colores personalizados
 import 'core/utils/app_info.dart'; // Información de la app (versión, build, etc.)
 import 'core/widgets/app_loading_skeleton.dart';
 import 'core/connectivity/network_status_controller.dart';
+import 'core/monitoring/crash_reporting_service.dart';
 
 // --------------------- CONTROL DE TEMA ---------------------
 // Clase que maneja el modo claro/oscuro usando Provider
@@ -65,6 +66,7 @@ void main() async {
     initializeDateFormatting('es_MX'),
     AppInfo.loadAppInfo(),
   ]);
+  await CrashReportingService.initialize();
   final prefs = await preferencesFuture;
 
   // MultiProvider: inyectamos estados globales (AppState y ThemeNotifier)

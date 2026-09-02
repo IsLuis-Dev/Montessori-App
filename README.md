@@ -133,6 +133,7 @@ lib/admin_web/main_admin.dart
 | Datos | Cloud Firestore |
 | Archivos | Firebase Storage |
 | Datos heredados | Firebase Realtime Database |
+| Diagnóstico Android | Firebase Crashlytics en compilaciones release |
 | Estado | Provider |
 | Preferencias | SharedPreferences |
 | Calendario | table_calendar |
@@ -140,7 +141,7 @@ lib/admin_web/main_admin.dart
 | Localización | intl y flutter_localizations |
 | Interfaz | Material Design, lucide_flutter y skeletonizer |
 
-Cloud Firestore es la fuente principal de los módulos actuales. Firebase Storage e `image_picker` respaldan el flujo de imágenes de noticias; Realtime Database permanece limitado a código heredado y no representa la dirección principal de la arquitectura.
+Cloud Firestore es la fuente principal de los módulos actuales. Firebase Storage e `image_picker` respaldan el flujo de imágenes de noticias; Realtime Database permanece limitado a código heredado y no representa la dirección principal de la arquitectura. Crashlytics reporta fallos fatales de Android únicamente en compilaciones `release`; permanece desactivado en depuración y no se utiliza en el panel web. La integración nativa de iOS queda pendiente de configuración y validación independiente.
 
 ## Configuración local segura
 
@@ -238,6 +239,7 @@ Cuando el título no sea suficiente, el cuerpo del commit debe explicar el conte
 - Las cuentas de servicio nunca deben integrarse en Flutter ni publicarse.
 - Los documentos operativos internos se mantienen fuera del repositorio.
 - Las demostraciones deben utilizar información ficticia.
+- Los reportes de diagnóstico no deben incluir nombres, correos, datos académicos ni otros datos personales mediante mensajes, claves o registros personalizados.
 - Los hallazgos de seguridad deben comunicarse de forma privada.
 
 Las capturas de entornos institucionales no se incluyen públicamente para evitar exponer identidades, datos académicos o configuraciones del cliente.
@@ -245,7 +247,7 @@ Las capturas de entornos institucionales no se incluyen públicamente para evita
 ## Roadmap
 
 - Completar pruebas integrales con Firebase Emulator Suite.
-- Definir App Check, monitoreo, respaldos y alertas de consumo.
+- Definir App Check, respaldos y alertas de consumo; completar la verificación operativa de Crashlytics en distribución cerrada.
 - Incorporar un backend privilegiado para operaciones administrativas sobre cuentas Auth.
 - Consolidar el flujo de imágenes en Storage con políticas de contenido, privacidad y costos.
 - Integrar Firebase Cloud Messaging después de definir consentimiento y audiencias.
