@@ -184,6 +184,14 @@ flutter run
 flutter run -d chrome -t lib/admin_web/main_admin.dart
 ```
 
+Para enviar tokens de App Check desde el panel web, proporciona la clave
+pública de reCAPTCHA Enterprise registrada en Firebase:
+
+```bash
+flutter run -d chrome -t lib/admin_web/main_admin.dart \
+  --dart-define=FIREBASE_APP_CHECK_WEB_SITE_KEY=TU_CLAVE_PUBLICA
+```
+
 ## Firebase y seguridad
 
 El repositorio conserva únicamente artefactos públicos y revisables:
@@ -195,6 +203,11 @@ El repositorio conserva únicamente artefactos públicos y revisables:
 - `.firebaserc.example`
 
 La seguridad no depende únicamente de validaciones visuales. Antes de producción deben configurarse y validarse reglas, App Check, entornos separados, respaldos, alertas de consumo y permisos con Firebase Emulator Suite.
+
+App Check debe permanecer en modo **Supervisión** hasta confirmar que las
+versiones vigentes de Android, iOS y web generan solicitudes verificadas. Los
+tokens de depuración nunca deben incluirse en el repositorio ni distribuirse en
+compilaciones de producción.
 
 ## Calidad
 
