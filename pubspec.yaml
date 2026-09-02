@@ -11,6 +11,7 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  firebase_app_check: ^0.4.7
   firebase_auth: ^6.6.1
   cloud_firestore: ^6.9.0
   firebase_core: ^4.13.0
