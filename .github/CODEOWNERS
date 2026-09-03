@@ -5,7 +5,11 @@
 /.github/ @cruzlcdev
 /firestore.rules @cruzlcdev
 /storage.rules @cruzlcdev
+/database.rules.json @cruzlcdev
 /firebase.json @cruzlcdev
 /pubspec.yaml @cruzlcdev
+/ARCHITECTURE.md @cruzlcdev
+/CONTRIBUTING.md @cruzlcdev
+/SECURITY.md @cruzlcdev
 /android/ @cruzlcdev
 /ios/ @cruzlcdev

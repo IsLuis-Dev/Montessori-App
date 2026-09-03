@@ -1,280 +1,197 @@
 <div align="center">
 
-<img src="lib/assets/icons/Propuesta_logo_2.png" alt="Propuesta de identidad visual de Cintli Montessori" width="420">
-
-<sub>Propuesta de identidad visual</sub>
+<img src="lib/assets/icons/Propuesta_logo_2.png" alt="Identidad visual de Cintli Montessori" width="420">
 
 # Cintli Montessori
 
-### Plataforma escolar multiplataforma para familias, docentes y administración
+Plataforma escolar en Flutter para familias, docentes y administración.
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
-![Platforms](https://img.shields.io/badge/iOS%20%7C%20Android%20%7C%20Web-0073DB?style=flat-square)
-![Status](https://img.shields.io/badge/Estado-Preproducción-F59E0B?style=flat-square)
-![License](https://img.shields.io/badge/Licencia-Propietaria-E11D48?style=flat-square)
+![Estado](https://img.shields.io/badge/Estado-Preproducción-F59E0B?style=flat-square)
+![Licencia](https://img.shields.io/badge/Licencia-Propietaria-E11D48?style=flat-square)
 
 </div>
 
-## Visión general
+## Descripción
 
-Cintli Montessori es una plataforma de gestión escolar compuesta por dos experiencias complementarias: una aplicación móvil para familias y docentes, y un panel administrativo desarrollado con Flutter Web. Centraliza comunicación, calendario, seguimiento académico y operación institucional mediante una arquitectura modular conectada a Firebase.
+Cintli Montessori centraliza comunicación escolar, calendario, directorio y
+seguimiento académico. El producto está compuesto por una aplicación móvil
+para familias y docentes y un panel administrativo independiente en Flutter
+Web.
 
-El proyecto evolucionó de un prototipo académico a una base orientada a producción. Su diseño prioriza experiencia adaptable, control de acceso por rol, separación de responsabilidades y aislamiento de la información por institución.
+El alcance actual corresponde a una sola escuela. El identificador
+`default_school` es una decisión explícita del producto y no debe interpretarse
+como una implementación multiinstitución.
 
-> Este repositorio es una versión pública de portafolio. No contiene credenciales, configuraciones Firebase por plataforma, cuentas de servicio ni datos personales de estudiantes, familias o personal.
+> Este repositorio público se utiliza como portafolio y referencia técnica. No
+> contiene credenciales, configuraciones privadas de Firebase ni datos reales
+> de estudiantes, familias o personal.
 
-### Qué resuelve
+## Estado del producto
 
-- Reúne comunicados, eventos y seguimiento académico en un solo canal institucional.
-- Ofrece a familias y docentes información acorde con su rol y sus relaciones escolares.
-- Proporciona al personal autorizado una superficie web para administrar la operación académica.
-- Mantiene los datos separados por institución y protegidos mediante autenticación y reglas de acceso.
-
-## Alcance actual
-
-| Producto | Usuarios | Capacidades principales | Versión |
+| Superficie | Versión | Estado | Usuarios |
 | --- | --- | --- | --- |
-| Aplicación móvil | Familias y docentes | Noticias, calendario, directorio, boletas, estadísticas, evaluaciones y configuración | `0.9.0+1` |
-| Panel administrativo web | Personal autorizado | Dashboard, noticias, calendario, grupos, materias, alumnos, familias y profesores | `0.7.0+1` |
+| Aplicación móvil | `0.9.0+1` | Preproducción | Familias y docentes |
+| Panel administrativo web | `0.7.0+1` | Preproducción | Personal autorizado |
 
-**Etapa:** preproducción y validación funcional.
+### Capacidades disponibles
 
-La administración móvil permanece deshabilitada; la gestión institucional se concentra en el panel web. Las notificaciones push forman parte del roadmap y no se presentan como una función activa.
-
-## Experiencia por perfil
-
-| Perfil | Acceso | Flujo principal |
-| --- | --- | --- |
-| Familia | Aplicación móvil | Iniciar sesión, consultar comunicados y calendario, revisar estudiantes vinculados, boletas y estadísticas |
-| Docente | Aplicación móvil | Iniciar sesión, consultar grupos y materias asignadas, registrar evaluaciones y dar seguimiento académico |
-| Administración | Panel web | Gestionar contenido, calendario, grupos, materias, estudiantes, familias, docentes y estado de cuentas |
-
-## Capacidades destacadas
-
-### Aplicación móvil
-
-- Autenticación con Firebase y perfil de usuario observado en tiempo real.
-- Experiencias diferenciadas para familias y docentes.
+- Autenticación y recuperación de contraseña mediante Firebase Authentication.
+- Perfiles con acceso diferenciado para familias, docentes y administración.
 - Noticias y calendario filtrados por audiencia y grupos relacionados.
-- Consulta de boletas, estadísticas y periodos académicos.
-- Registro docente de evaluaciones dentro de grupos y materias autorizados.
-- Modo claro y oscuro con preferencia persistente.
-- Layout adaptable para iOS y Android.
-- Estados de carga, manejo de conectividad y mensajes de error para el usuario.
-- Recuperación de contraseña y control de cuentas inactivas.
+- Directorio de grupos, estudiantes y docentes.
+- Evaluaciones, boletas y estadísticas académicas.
+- Administración web de noticias, eventos, grupos, materias y cuentas.
+- Temas claro y oscuro, diseño adaptable y estados de conectividad.
+- Crashlytics para fallos fatales de Android en compilaciones `release`.
+- App Check integrado en Android y sin aplicación forzosa durante la
+  preproducción.
 
-### Panel administrativo web
+### Capacidades no disponibles
 
-- Dashboard con indicadores operativos.
-- Gestión de noticias, audiencias, expiración y archivado.
-- Carga de imágenes de noticias mediante Firebase Storage.
-- Administración de calendario, fechas, horarios y grupos destinatarios.
-- Gestión de grupos, materias, alumnos, familias y profesores.
-- Vinculación de docentes con grupos y de familias con estudiantes.
-- Aprovisionamiento controlado de cuentas Firebase Authentication.
-- Activación, inactivación y confirmaciones para acciones críticas.
-- Tema claro, oscuro o basado en el sistema.
-- Formularios y componentes diseñados para operación en escritorio.
+- Administración general desde la aplicación móvil.
+- Notificaciones push.
+- Asistencia de estudiantes o personal.
+- Transporte escolar con seguimiento en tiempo real.
+- Distribución pública en Google Play o App Store.
+
+Estas funciones requieren una decisión de alcance y no deben habilitarse solo
+mediante cambios visuales o banderas locales.
 
 ## Arquitectura
 
 ```mermaid
 flowchart LR
-    UI["Aplicación móvil / Panel web"] --> State["Controllers y Provider"]
-    State --> Repo["Repositories"]
-    Repo --> Auth["Firebase Authentication"]
-    Repo --> DB["Cloud Firestore"]
-    Repo --> Files["Firebase Storage"]
-    Repo --> Local["SharedPreferences"]
-    Legacy["Módulos heredados"] -. transición .-> RTDB["Realtime Database"]
+    View["Pantallas y widgets"] --> Controller["Controllers y Provider"]
+    Controller --> Contract["Contratos de repositorio"]
+    Contract --> Firestore["Cloud Firestore"]
+    Contract --> Auth["Firebase Authentication"]
+    Contract --> Storage["Firebase Storage"]
+    Legacy["Personal: módulo heredado"] -.-> RTDB["Realtime Database"]
 ```
 
-La aplicación sigue una organización modular por funcionalidad:
+Las vistas presentan estado, los controladores coordinan casos de uso y los
+repositorios encapsulan el acceso a datos. Las reglas completas, dependencias
+permitidas y deuda técnica conocida se documentan en
+[ARCHITECTURE.md](ARCHITECTURE.md).
 
 ```text
 lib/
-├── admin_web/            Panel administrativo, datos, presentación y tema
-├── core/                 Configuración, conectividad, layout, tema y widgets
-├── features/
-│   ├── academics/        Periodos, materias y evaluaciones
-│   ├── auth/             Sesión, perfiles y recuperación de acceso
-│   ├── calendar/         Eventos y audiencias
-│   ├── directory/        Grupos, estudiantes y profesores
-│   └── news/             Comunicados y audiencias
-├── screens/              Composición de pantallas móviles
-└── main.dart             Punto de entrada de la aplicación móvil
+├── admin_web/        Panel administrativo, repositorios, tema y widgets
+├── core/             Servicios y componentes compartidos
+├── features/         Auth, directorio, noticias, calendario y académicos
+├── academics/        Composición de flujos académicos móviles
+├── news/             Composición de comunicados móviles
+├── people/           Directorio y módulo heredado de personal
+├── screens/          Pantallas principales de la aplicación móvil
+└── main.dart         Punto de entrada móvil
 ```
 
-El panel administrativo utiliza un punto de entrada independiente:
+Puntos de entrada:
 
 ```text
+lib/main.dart
 lib/admin_web/main_admin.dart
 ```
 
-### Decisiones técnicas
-
-- **Cloud Firestore como fuente principal:** los módulos activos consumen colecciones y streams de Firestore.
-- **Storage con alcance definido:** las imágenes de noticias se almacenan bajo rutas protegidas por institución.
-- **Realtime Database en transición:** permanece en un módulo heredado mientras la arquitectura converge en Firestore.
-- **Separación por institución:** la información se organiza bajo `schools/{schoolId}`.
-- **Acceso por rol:** los perfiles y reglas contemplan usuarios autorizados, estado de cuenta y relaciones con grupos o estudiantes.
-- **Repositorios desacoplados:** la interfaz depende de controladores y contratos de datos, no de consultas dispersas en los widgets.
-- **Dos superficies, un stack:** móvil y administración comparten Flutter, Dart, modelos y criterios visuales.
-
-## Stack tecnológico
-
-| Área | Tecnología |
-| --- | --- |
-| Móvil | Flutter y Dart |
-| Administración | Flutter Web |
-| Autenticación | Firebase Authentication |
-| Datos | Cloud Firestore |
-| Archivos | Firebase Storage |
-| Datos heredados | Firebase Realtime Database |
-| Diagnóstico Android | Firebase Crashlytics en compilaciones release |
-| Estado | Provider |
-| Preferencias | SharedPreferences |
-| Calendario | table_calendar |
-| Conectividad | connectivity_plus |
-| Localización | intl y flutter_localizations |
-| Interfaz | Material Design, lucide_flutter y skeletonizer |
-
-Cloud Firestore es la fuente principal de los módulos actuales. Firebase Storage e `image_picker` respaldan el flujo de imágenes de noticias; Realtime Database permanece limitado a código heredado y no representa la dirección principal de la arquitectura. Crashlytics reporta fallos fatales de Android únicamente en compilaciones `release`; permanece desactivado en depuración y no se utiliza en el panel web. La integración nativa de iOS queda pendiente de configuración y validación independiente.
-
-## Configuración local segura
-
-### Requisitos
+## Requisitos
 
 - Flutter compatible con Dart `^3.7.2`.
-- Xcode para desarrollo iOS.
 - Android Studio para desarrollo Android.
-- Un proyecto Firebase propio.
-- FlutterFire CLI y Firebase CLI.
+- Xcode para desarrollo iOS en macOS.
+- Firebase CLI y FlutterFire CLI.
+- Un proyecto Firebase de desarrollo propio.
 
-### Preparación
+## Configuración local
 
 ```bash
 flutter pub get
 flutterfire configure
 ```
 
-`flutterfire configure` debe generar localmente los archivos excluidos del repositorio:
+La configuración debe generar localmente los siguientes archivos excluidos de
+Git:
 
 ```text
+.firebaserc
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 macos/Runner/GoogleService-Info.plist
 lib/core/config/firebase_options.dart
-.firebaserc
 ```
 
-No deben añadirse configuraciones reales, llaves privadas o cuentas de servicio a commits públicos.
+Nunca compartas credenciales mediante commits, issues o pull requests.
 
-### Ejecutar la aplicación móvil
+### Aplicación móvil
 
 ```bash
 flutter run
 ```
 
-### Ejecutar el panel administrativo
+### Panel administrativo
 
 ```bash
 flutter run -d chrome -t lib/admin_web/main_admin.dart
 ```
 
-Para enviar tokens de App Check desde el panel web, proporciona la clave
-pública de reCAPTCHA Enterprise registrada en Firebase:
+App Check para web requiere una clave pública de reCAPTCHA Enterprise:
 
 ```bash
 flutter run -d chrome -t lib/admin_web/main_admin.dart \
   --dart-define=FIREBASE_APP_CHECK_WEB_SITE_KEY=TU_CLAVE_PUBLICA
 ```
 
-## Firebase y seguridad
+Durante la preproducción, App Check debe permanecer sin aplicación forzosa en
+Firebase Console. Los tokens de depuración son locales y nunca se versionan.
 
-El repositorio conserva únicamente artefactos públicos y revisables:
+## Validación
 
-- `firestore.rules`
-- `firestore.indexes.json`
-- `storage.rules`
-- `firebase.json` sin identificadores de proyecto
-- `.firebaserc.example`
-
-La seguridad no depende únicamente de validaciones visuales. Antes de producción deben configurarse y validarse reglas, App Check, entornos separados, respaldos, alertas de consumo y permisos con Firebase Emulator Suite.
-
-App Check debe permanecer en modo **Supervisión** hasta confirmar que las
-versiones vigentes de Android, iOS y web generan solicitudes verificadas. Los
-tokens de depuración nunca deben incluirse en el repositorio ni distribuirse en
-compilaciones de producción.
-
-## Calidad
-
-Comandos principales de validación:
+Antes de abrir un pull request ejecuta:
 
 ```bash
-flutter analyze
+dart format --output=none --set-exit-if-changed lib test
+flutter analyze --fatal-infos --fatal-warnings
 flutter test
+flutter build apk --debug
+```
+
+Cuando se modifica el panel web, agrega:
+
+```bash
 flutter build web --release -t lib/admin_web/main_admin.dart
 ```
 
-La revisión previa a publicación debe incluir:
+La integración continua repite análisis, pruebas y compilación Android en cada
+pull request dirigido a `main`.
 
-- ausencia de secretos y configuraciones locales;
-- pruebas de reglas con usuarios y roles ficticios;
-- navegación para familias, docentes y cuentas inactivas;
-- sincronización de streams y estados sin conexión;
-- layouts móviles y web en múltiples resoluciones;
-- consistencia del versionado móvil y administrativo.
+## Colaboración
 
-## Convención de commits
+Toda modificación debe realizarse en una rama y llegar a `main` mediante pull
+request. La guía de arquitectura, comentarios, commits, validación y definición
+de terminado se encuentra en [CONTRIBUTING.md](CONTRIBUTING.md).
 
-El historial debe comunicar qué cambió, en qué parte del sistema y por qué. Cada commit debe representar un propósito verificable y utilizar una descripción breve con este formato:
+Los reportes de vulnerabilidades siguen el proceso privado descrito en
+[SECURITY.md](SECURITY.md).
 
-```text
-<tipo>(<alcance>): <cambio concreto>
-```
+## Próximos objetivos
 
-Tipos recomendados: `feat`, `fix`, `refactor`, `docs`, `test`, `build` y `chore`.
+- Distribuir compilaciones internas mediante Firebase App Distribution.
+- Ampliar pruebas de controladores, repositorios y flujos críticos.
+- Validar reglas con Firebase Emulator Suite y datos ficticios.
+- Extraer componentes y lógica de pantallas que aún concentran varias
+  responsabilidades.
+- Incorporar un backend privilegiado antes de automatizar operaciones sensibles
+  sobre cuentas de Firebase Authentication.
+- Evaluar Performance Monitoring, Remote Config y Cloud Messaging como cambios
+  independientes y con métricas de aceptación.
 
-```text
-feat(auth): agrega recuperación de contraseña
-fix(calendar): evita guardar eventos duplicados
-docs(readme): aclara arquitectura y configuración local
-```
-
-Cuando el título no sea suficiente, el cuerpo del commit debe explicar el contexto, la decisión tomada y la validación ejecutada. No deben mezclarse cambios funcionales, refactors y documentación sin relación en un mismo commit.
-
-## Privacidad
-
-- No se deben registrar datos reales de estudiantes en issues, pruebas o commits.
-- Las cuentas de servicio nunca deben integrarse en Flutter ni publicarse.
-- Los documentos operativos internos se mantienen fuera del repositorio.
-- Las demostraciones deben utilizar información ficticia.
-- Los reportes de diagnóstico no deben incluir nombres, correos, datos académicos ni otros datos personales mediante mensajes, claves o registros personalizados.
-- Los hallazgos de seguridad deben comunicarse de forma privada.
-
-Las capturas de entornos institucionales no se incluyen públicamente para evitar exponer identidades, datos académicos o configuraciones del cliente.
-
-## Roadmap
-
-- Completar pruebas integrales con Firebase Emulator Suite.
-- Definir App Check, respaldos y alertas de consumo; completar la verificación operativa de Crashlytics en distribución cerrada.
-- Incorporar un backend privilegiado para operaciones administrativas sobre cuentas Auth.
-- Consolidar el flujo de imágenes en Storage con políticas de contenido, privacidad y costos.
-- Integrar Firebase Cloud Messaging después de definir consentimiento y audiencias.
-- Preparar distribución cerrada mediante TestFlight y Google Play Testing.
-- Ejecutar pruebas de aceptación con datos completamente ficticios.
-
-## Autor y contacto
+## Autor y licencia
 
 Diseño, arquitectura y desarrollo por [Luis Cruz](https://github.com/cruzlcdev).
 
-Para proyectos, colaboración profesional o contratación: [luisitprivt@gmail.com](mailto:luisitprivt@gmail.com).
+Contacto profesional: [luisitprivt@gmail.com](mailto:luisitprivt@gmail.com).
 
-## Licencia
-
-Copyright (c) 2026 Luisdev. Todos los derechos reservados.
-
-Este software es propietario y se publica únicamente con fines demostrativos y de portafolio. Consulta [LICENSE](LICENSE) para conocer las restricciones de uso.
+Copyright (c) 2026 Luisdev. Todos los derechos reservados. Consulta
+[LICENSE](LICENSE) para conocer las restricciones de uso.
