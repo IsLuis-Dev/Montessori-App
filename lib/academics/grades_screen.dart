@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/features/directory/data/models/school_group_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
-import 'package:prototipo_2/features/directory/presentation/controllers/directory_controller.dart';
-import 'package:prototipo_2/screens/grades/group_report_cards_screen.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/features/directory/data/models/school_group_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/features/directory/presentation/controllers/directory_controller.dart';
+import 'package:cintli_montessori/screens/grades/group_report_cards_screen.dart';
 
+/// Muestra los grupos cuyas boletas puede consultar el perfil vigente.
 class GradesScreen extends StatefulWidget {
   const GradesScreen({super.key});
 

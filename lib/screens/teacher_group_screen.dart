@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/academics/group_subject_screen.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/auth/presentation/screens/unauthorized_screen.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/features/directory/data/models/school_group_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
-import 'package:prototipo_2/features/directory/presentation/controllers/directory_controller.dart';
+import 'package:cintli_montessori/academics/group_subject_screen.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/auth/presentation/screens/unauthorized_screen.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/features/directory/data/models/school_group_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/features/directory/presentation/controllers/directory_controller.dart';
 
+/// Presenta los grupos asignados al docente para iniciar evaluaciones.
 class TeacherGroupsScreen extends StatefulWidget {
   const TeacherGroupsScreen({super.key});
 
@@ -477,6 +478,7 @@ class _StateCard extends StatelessWidget {
   }
 }
 
+/// Proyección mínima de un grupo utilizada por la navegación docente.
 class GroupInfo {
   const GroupInfo({
     required this.id,

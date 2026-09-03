@@ -14,6 +14,7 @@ import '../widgets/admin_form_controls.dart';
 import '../widgets/admin_segmented_filter.dart';
 import '../widgets/admin_feedback.dart';
 
+/// Administra cuentas familiares y sus vínculos con estudiantes.
 class AdminFamiliesScreen extends StatefulWidget {
   const AdminFamiliesScreen({super.key});
 

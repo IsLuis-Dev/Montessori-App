@@ -28,6 +28,7 @@ enum _AdminSection {
   teachers,
 }
 
+/// Compone navegación, sesión y contenido principal del panel administrativo.
 class AdminShellScreen extends StatefulWidget {
   const AdminShellScreen({super.key, required this.user});
 

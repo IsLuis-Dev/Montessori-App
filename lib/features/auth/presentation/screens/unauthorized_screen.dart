@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/theme/colors.dart';
@@ -8,6 +8,7 @@ import '../../../../core/widgets/app_logo.dart';
 import '../controllers/current_user_controller.dart';
 import '../widgets/auth_decorated_background.dart';
 
+/// Bloquea una ruta cuando la cuenta no tiene un perfil escolar autorizado.
 class UnauthorizedScreen extends StatefulWidget {
   const UnauthorizedScreen({super.key});
 

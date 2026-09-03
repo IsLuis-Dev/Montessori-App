@@ -5,6 +5,10 @@ import '../../features/directory/data/models/school_group_model.dart';
 import '../../features/directory/data/models/teacher_model.dart';
 import 'admin_auth_account_provisioner.dart';
 
+/// Gestiona docentes y sincroniza sus grupos con el perfil de acceso móvil.
+///
+/// La vinculación con Auth puede depender de correo o `authUid`; cualquier
+/// ambigüedad se rechaza para evitar modificar una cuenta incorrecta.
 class AdminTeachersRepository {
   AdminTeachersRepository({
     FirebaseFirestore? firestore,
@@ -430,6 +434,7 @@ class AdminTeachersRepository {
   }
 }
 
+/// Resultado de crear el registro docente y su cuenta de acceso asociada.
 class TeacherCreationResult {
   const TeacherCreationResult.newAccount({required this.resetEmailSent})
     : linkedExistingAccount = false;

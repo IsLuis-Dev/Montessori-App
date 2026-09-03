@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa la información mínima de un estudiante utilizada por la app.
 class StudentModel {
   const StudentModel({
     required this.id,

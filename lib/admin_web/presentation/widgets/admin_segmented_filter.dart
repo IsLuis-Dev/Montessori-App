@@ -5,6 +5,7 @@ import '../theme/admin_icons.dart';
 import '../../../core/theme/colors.dart';
 import '../theme/admin_theme.dart';
 
+/// Asocia un valor de filtro con su etiqueta visible.
 class AdminSegmentedOption<T> {
   const AdminSegmentedOption({required this.value, required this.label});
 
@@ -12,6 +13,7 @@ class AdminSegmentedOption<T> {
   final String label;
 }
 
+/// Filtro segmentado reutilizable para catálogos administrativos.
 class AdminSegmentedFilter<T> extends StatelessWidget {
   const AdminSegmentedFilter({
     super.key,

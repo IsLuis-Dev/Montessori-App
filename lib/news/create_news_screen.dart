@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:prototipo_2/features/news/data/repositories/firestore_news_repository.dart';
-import 'package:prototipo_2/features/news/presentation/controllers/news_controller.dart';
+import 'package:cintli_montessori/features/news/data/repositories/firestore_news_repository.dart';
+import 'package:cintli_montessori/features/news/presentation/controllers/news_controller.dart';
 
+/// Formulario móvil heredado para crear comunicados cuando el acceso lo permite.
 class CreateNewsScreen extends StatefulWidget {
   const CreateNewsScreen({super.key, this.controller});
 

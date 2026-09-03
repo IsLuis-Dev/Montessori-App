@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/constants/app_constants.dart';
 import '../../features/directory/data/models/school_group_model.dart';
 
+/// Gestiona el catálogo de grupos y genera identificadores estables y legibles.
 class AdminGroupsRepository {
   AdminGroupsRepository({
     FirebaseFirestore? firestore,

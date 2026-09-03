@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/admin_auth_gate.dart';
 import 'theme/admin_theme.dart';
 
+/// Configura el tema y la puerta de autenticación del panel administrativo.
 class AdminWebApp extends StatelessWidget {
   const AdminWebApp({super.key, required this.themeController});
 

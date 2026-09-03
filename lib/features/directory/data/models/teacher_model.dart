@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa un docente, su cuenta vinculada y grupos asignados.
 class TeacherModel {
   const TeacherModel({
     required this.id,

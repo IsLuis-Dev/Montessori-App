@@ -4,6 +4,7 @@ import '../../../core/theme/colors.dart';
 import '../theme/admin_icons.dart';
 import '../theme/admin_theme.dart';
 
+/// Selector de hora consistente para formularios del panel.
 class AdminTimeSelector extends StatelessWidget {
   const AdminTimeSelector({
     super.key,

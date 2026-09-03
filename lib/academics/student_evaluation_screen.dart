@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
-import 'package:flutter/services.dart'; // Para FilteringTextInputFormatter
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/features/academics/data/models/evaluation_model.dart';
-import 'package:prototipo_2/features/academics/data/models/subject_model.dart';
-import 'package:prototipo_2/features/academics/data/repositories/firestore_evaluation_repository.dart';
-import 'package:prototipo_2/features/directory/data/models/student_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/features/academics/data/models/evaluation_model.dart';
+import 'package:cintli_montessori/features/academics/data/models/subject_model.dart';
+import 'package:cintli_montessori/features/academics/data/repositories/firestore_evaluation_repository.dart';
+import 'package:cintli_montessori/features/directory/data/models/student_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
 import '../core/theme/colors.dart';
 import '../core/widgets/app_loading_skeleton.dart';
 import '../core/widgets/network_aware_module.dart';
@@ -18,6 +18,10 @@ import '../features/auth/presentation/controllers/current_user_controller.dart';
 import '../features/auth/presentation/screens/unauthorized_screen.dart';
 import '../screens/teacher_group_screen.dart';
 
+/// Permite consultar o registrar la evaluación de un estudiante autorizado.
+///
+/// La pantalla observa en tiempo real tanto la disponibilidad del estudiante
+/// como la evaluación para impedir ediciones sobre relaciones eliminadas.
 class StudentEvaluationScreen extends StatefulWidget {
   final String studentId;
   final String studentName;
@@ -58,7 +62,7 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
   bool _studentUnavailable = false;
   String? _saveError;
 
-  // Opciones para evaluación cualitativa (preescolar)
+  /// Escala cualitativa vigente para evaluaciones de preescolar.
   final List<String> _qualitativeOptions = [
     'Excelente',
     'Bueno',
@@ -167,7 +171,7 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     });
   }
 
-  // Carga la evaluación existente del estudiante
+  /// Sustituye la suscripción cuando cambia materia, periodo o estudiante.
   void _startEvaluationListener() {
     setState(() => _isLoading = true);
 
@@ -208,7 +212,6 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     super.dispose();
   }
 
-  // Guarda la evaluación en Firebase
   Future<void> _saveEvaluation() async {
     final currentUserId = _auth.currentUser?.uid;
     if (currentUserId == null) return;
@@ -247,7 +250,6 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
 
       if (!mounted) return;
 
-      // Muestra snackbar de éxito
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Row(
@@ -299,7 +301,6 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     }
   }
 
-  // Valida si la evaluación es válida para guardar
   bool _isValidEvaluation() {
     if (isQualitativeEvaluation) {
       return _qualitativeValue != null && _qualitativeValue!.isNotEmpty;
@@ -310,10 +311,9 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     }
   }
 
-  // Valida el texto de retroalimentación (solo letras y signos básicos)
   String? _validateFeedback(String? value) {
     if (value == null || value.isEmpty) {
-      return null; // No mostrar error si está vacío
+      return null;
     }
 
     final validCharacters = RegExp(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s.,;:¡!¿?()\-"]*$');
@@ -710,7 +710,6 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     );
   }
 
-  // Selector de evaluación cualitativa (preescolar)
   Widget _buildQualitativeSelector(bool canEditEvaluation) {
     return Column(
       children:
@@ -776,7 +775,6 @@ class _StudentEvaluationScreenState extends State<StudentEvaluationScreen> {
     }
   }
 
-  // Campo de evaluación cuantitativa (otros grupos)
   Widget _buildQuantitativeField(bool canEditEvaluation) {
     return TextFormField(
       initialValue: _quantitativeValue?.toString(),

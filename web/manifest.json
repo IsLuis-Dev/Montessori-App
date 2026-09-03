@@ -1,11 +1,11 @@
 {
-    "name": "prototipo_2",
-    "short_name": "prototipo_2",
+    "name": "Cintli Montessori",
+    "short_name": "Cintli",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Plataforma escolar para familias, docentes y administración.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

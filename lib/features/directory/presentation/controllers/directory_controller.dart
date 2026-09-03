@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
 
 import '../../data/models/school_group_model.dart';
 import '../../data/models/student_model.dart';
 import '../../data/models/teacher_model.dart';
 import '../../data/repositories/directory_repository.dart';
 
+/// Administra suscripciones del directorio y sus estados de carga o error.
 class DirectoryController extends ChangeNotifier {
   DirectoryController({
     required DirectoryRepository repository,

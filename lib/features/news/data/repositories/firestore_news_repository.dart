@@ -5,6 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/news_model.dart';
 import 'news_repository.dart';
 
+/// Resuelve comunicados generales y copias por audiencia desde Firestore.
+///
+/// La salida se deduplica por documento para impedir comunicados repetidos
+/// cuando una cuenta pertenece a varios grupos relacionados.
 class FirestoreNewsRepository implements NewsRepository {
   FirestoreNewsRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

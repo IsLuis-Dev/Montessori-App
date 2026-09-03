@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
-/// Catalogo de iconos de la aplicacion movil.
+/// Catálogo de iconos de la aplicación móvil.
 ///
 /// Centralizar la familia visual evita mezclar Material Icons con Lucide y
-/// permite ajustar un simbolo sin modificar cada pantalla.
+/// permite ajustar un símbolo sin modificar cada pantalla.
 abstract final class AppIcons {
   static const IconData addRounded = LucideIcons.plus;
   static const IconData adminPanelSettingsOutlined = LucideIcons.shieldCheck;

@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
 
 import '../../data/models/calendar_event_model.dart';
 import '../../data/repositories/calendar_repository.dart';
 
+/// Coordina audiencia, rango visible y actualización del calendario.
 class CalendarController extends ChangeNotifier {
   CalendarController({
     required CalendarRepository repository,

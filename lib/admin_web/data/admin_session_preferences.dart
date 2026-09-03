@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Conserva la preferencia de persistencia de la sesión administrativa web.
 class AdminSessionPreferences {
   const AdminSessionPreferences._();
 

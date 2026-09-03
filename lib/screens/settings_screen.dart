@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
-import 'package:prototipo_2/core/widgets/custom_drawer.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:provider/provider.dart';
-import '../core/theme/colors.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/widgets/custom_drawer.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../main.dart'; // ThemeNotifier
-import '../core/utils/app_info.dart'; // Importamos AppInfo para mostrar versión
+import 'package:provider/provider.dart';
 
-// Pantalla de Configuración
+import '../core/theme/colors.dart';
+import '../core/theme/theme_controller.dart';
+import '../core/utils/app_info.dart';
+
+/// Presenta preferencias locales, datos de cuenta e información legal.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -17,16 +18,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String _selectedLanguage =
-      'Español'; // Idioma seleccionado (por ahora solo Español)
+  String _selectedLanguage = 'Español';
 
   @override
   Widget build(BuildContext context) {
-    // Usamos Provider para acceder al estado global del tema
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final themeController = context.watch<ThemeController>();
     final currentUser = context.watch<CurrentUserController>();
     final user = currentUser.user;
-    bool isDarkMode = themeNotifier.themeMode == ThemeMode.dark;
+    final isDarkMode = themeController.themeMode == ThemeMode.dark;
 
     return Scaffold(
       backgroundColor: AppColors.background(context),
@@ -39,15 +38,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           builder:
               (context) => IconButton(
                 icon: const Icon(AppIcons.menu),
-                onPressed:
-                    () =>
-                        Scaffold.of(
-                          context,
-                        ).openDrawer(), // Abre el menú lateral
+                onPressed: () => Scaffold.of(context).openDrawer(),
               ),
         ),
       ),
-      drawer: const CustomDrawer(), // Drawer personalizado
+      drawer: const CustomDrawer(),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -85,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   trailing: Switch.adaptive(
                     value: isDarkMode,
                     activeThumbColor: AppColors.primaryBlue,
-                    onChanged: themeNotifier.toggleTheme,
+                    onChanged: themeController.setDarkMode,
                   ),
                 ),
                 _buildTileDivider(isDarkMode),
@@ -377,7 +372,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ];
   }
 
-  // ------------------ Acerca de la app ------------------
   void _showAboutDialog(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -424,7 +418,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // ------------------ Política de privacidad ------------------
   void _showPrivacyPolicy(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -734,7 +727,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // ------------------ Cerrar sesión ------------------
   void _logout(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 

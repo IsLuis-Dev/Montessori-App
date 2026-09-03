@@ -1,47 +1,57 @@
-// Importa la librería foundation de Flutter, necesaria para usar ChangeNotifier
 import 'package:flutter/foundation.dart';
 
-// Clase AppState que extiende de ChangeNotifier, lo que permite
-// notificar a los widgets que estén escuchando cuando cambie su estado.
+/// Conserva la selección académica compartida entre rutas de calificaciones.
+///
+/// No contiene información de sesión ni realiza consultas. Su responsabilidad
+/// se limita a mantener el periodo y el estudiante que el usuario seleccionó.
 class AppState with ChangeNotifier {
-  // Variables privadas para manejar el estado de la aplicación
-  int _selectedTerm = 1;             // Periodo/Trimestre seleccionado (1, 2 o 3)
-  String _selectedStudentId = '';    // ID del estudiante seleccionado
-  String _selectedStudentName = '';  // Nombre del estudiante seleccionado
-  String _selectedGroupId = '';      // ID del grupo seleccionado
+  int _selectedTerm = 1;
+  String _selectedStudentId = '';
+  String _selectedStudentName = '';
+  String _selectedGroupId = '';
 
-  // Getters públicos para acceder a las variables privadas
   int get selectedTerm => _selectedTerm;
   String get selectedStudentId => _selectedStudentId;
   String get selectedStudentName => _selectedStudentName;
   String get selectedGroupId => _selectedGroupId;
 
-  // Método para cambiar el trimestre seleccionado.
-  // Solo permite valores entre 1 y 3.
+  /// Cambia el periodo cuando el valor pertenece al rango vigente de 1 a 3.
   void changeTerm(int newTerm) {
-    if (newTerm >= 1 && newTerm <= 3) {
-      _selectedTerm = newTerm;
-      notifyListeners(); // Notifica a los widgets que usan este estado.
-    }
+    if (newTerm < 1 || newTerm > 3 || _selectedTerm == newTerm) return;
+
+    _selectedTerm = newTerm;
+    notifyListeners();
   }
 
-  // Método para establecer el contexto de un estudiante (ID, nombre y grupo).
+  /// Establece el estudiante sobre el que operan las rutas académicas.
   void setStudentContext({
     required String studentId,
     required String studentName,
     required String groupId,
   }) {
+    if (_selectedStudentId == studentId &&
+        _selectedStudentName == studentName &&
+        _selectedGroupId == groupId) {
+      return;
+    }
+
     _selectedStudentId = studentId;
     _selectedStudentName = studentName;
     _selectedGroupId = groupId;
-    notifyListeners(); // Actualiza la UI con los nuevos valores.
+    notifyListeners();
   }
 
-  // Método para limpiar el contexto del estudiante (resetea a valores vacíos).
+  /// Elimina la selección al abandonar el flujo de un estudiante.
   void clearStudentContext() {
+    if (_selectedStudentId.isEmpty &&
+        _selectedStudentName.isEmpty &&
+        _selectedGroupId.isEmpty) {
+      return;
+    }
+
     _selectedStudentId = '';
     _selectedStudentName = '';
     _selectedGroupId = '';
-    notifyListeners(); // Notifica a la UI que los valores fueron reseteados.
+    notifyListeners();
   }
 }

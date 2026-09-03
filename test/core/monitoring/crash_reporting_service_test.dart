@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:prototipo_2/core/monitoring/crash_reporting_service.dart';
+import 'package:cintli_montessori/core/monitoring/crash_reporting_service.dart';
 
 void main() {
   group('CrashReportingService.shouldEnableCollection', () {

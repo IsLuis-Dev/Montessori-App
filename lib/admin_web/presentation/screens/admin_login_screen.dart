@@ -8,6 +8,7 @@ import '../../../core/utils/app_versions.dart';
 import '../theme/admin_theme.dart';
 import '../../../core/widgets/app_logo.dart';
 
+/// Autentica al personal antes de evaluar su perfil administrativo.
 class AdminLoginScreen extends StatefulWidget {
   const AdminLoginScreen({super.key});
 

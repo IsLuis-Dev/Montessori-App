@@ -9,6 +9,10 @@ import '../theme/admin_theme.dart';
 OverlayEntry? _activeFeedbackEntry;
 Timer? _activeFeedbackTimer;
 
+/// Presenta un único mensaje temporal sobre el panel administrativo.
+///
+/// Una notificación nueva reemplaza la anterior para evitar overlays apilados y
+/// temporizadores que intenten cerrar entradas obsoletas.
 void showAdminFeedback(
   BuildContext context, {
   required String title,

@@ -1,8 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
 
+/// Fondo adaptable compartido por las pantallas de autenticación.
 class AuthDecoratedBackground extends StatefulWidget {
   const AuthDecoratedBackground({super.key, required this.child});
 

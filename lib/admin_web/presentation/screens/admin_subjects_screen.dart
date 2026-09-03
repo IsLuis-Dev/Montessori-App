@@ -27,6 +27,7 @@ void _showSubjectsToast(
   );
 }
 
+/// Administra materias, tipo de evaluación y grupos relacionados.
 class AdminSubjectsScreen extends StatefulWidget {
   const AdminSubjectsScreen({super.key});
 

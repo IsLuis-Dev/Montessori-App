@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../core/widgets/custom_drawer.dart';
 import '../core/theme/colors.dart';
 
+/// Muestra categorías del directorio de personal almacenado en RTDB.
+///
+/// Este módulo es heredado y permanece aislado hasta su futura migración a
+/// modelos tipados y Cloud Firestore.
 class StaffScreen extends StatefulWidget {
   const StaffScreen({super.key});
 
@@ -28,6 +32,7 @@ class _StaffScreenState extends State<StaffScreen> {
       final snapshot = await _dbRef.child('staff').once();
       final data = snapshot.snapshot.value as Map<dynamic, dynamic>? ?? {};
 
+      if (!mounted) return;
       setState(() {
         _staffCategories =
             data.entries.map((entry) {
@@ -41,10 +46,11 @@ class _StaffScreenState extends State<StaffScreen> {
             }).toList();
         _isLoading = false;
       });
-    } catch (e) {
+    } catch (_) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Error al cargar el personal: ${e.toString()}';
+        _errorMessage = 'No fue posible cargar el directorio de personal.';
       });
     }
   }
@@ -167,6 +173,7 @@ class _StaffScreenState extends State<StaffScreen> {
   }
 }
 
+/// Muestra integrantes de una categoría del módulo heredado de personal.
 class CategoryMembersScreen extends StatefulWidget {
   final String categoryId;
   final String categoryName;
@@ -206,21 +213,23 @@ class _CategoryMembersScreenState extends State<CategoryMembersScreen> {
               'name': entry.value['name'],
               'position': _getPosition(widget.categoryId),
               'schedule': _getSchedule(widget.categoryId),
-              'contact': _generateContactInfo(entry.value['name']),
             };
           }).toList();
 
-      // Ordenar alfabéticamente
-      members.sort((a, b) => a['name'].compareTo(b['name']));
+      members.sort(
+        (a, b) => a['name'].toString().compareTo(b['name'].toString()),
+      );
 
+      if (!mounted) return;
       setState(() {
         _members = members;
         _isLoading = false;
       });
-    } catch (e) {
+    } catch (_) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Error al cargar miembros: ${e.toString()}';
+        _errorMessage = 'No fue posible cargar los integrantes del personal.';
       });
     }
   }
@@ -249,31 +258,6 @@ class _CategoryMembersScreenState extends State<CategoryMembersScreen> {
       'direccion': 'L-V 8:00 - 17:00',
     };
     return schedules[categoryId] ?? 'L-V 8:00 - 15:00';
-  }
-
-  Map<String, String> _generateContactInfo(String name) {
-    // final email = _generateEmail(name);
-    final phone = _generatePhone();
-    return {
-      //'email': email,
-      'phone': phone,
-      'extension': _generateExtension(),
-    };
-  }
-
-  /*
-  String _generateEmail(String name) {
-  final parts = name.toLowerCase().split(' ');
-  return '${parts[0].substring(0, 3)}.${parts.length > 1 ? parts[1] : parts[0]}@escuela.edu.mx';
-  }
-*/
-  String _generatePhone() {
-    final rnd = (1000000 + DateTime.now().millisecond % 9000000).toString();
-    return '55 ${rnd.substring(0, 4)} ${rnd.substring(4)}';
-  }
-
-  String _generateExtension() {
-    return (100 + DateTime.now().millisecond % 900).toString();
   }
 
   @override
@@ -322,7 +306,6 @@ class _CategoryMembersScreenState extends State<CategoryMembersScreen> {
           ],
         ),
         trailing: const Icon(AppIcons.chevronRight),
-        onTap: () => _showMemberDetails(context, member),
       ),
     );
   }
@@ -338,128 +321,5 @@ class _CategoryMembersScreenState extends State<CategoryMembersScreen> {
       'direccion': Colors.red,
     };
     return colors[categoryId] ?? Colors.grey;
-  }
-
-  void _showMemberDetails(BuildContext context, Map<String, dynamic> member) {
-    _getCategoryColor(widget.categoryId);
-
-    /* COMENTADO TEMPORALMENTE - SE IMPLEMENTARA EN EL FUTURO
-    
-    showDialog(
-      context: context,
-      builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Encabezado
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: categoryColor.withOpacity(0.2),
-                    child: Icon(
-                      AppIcons.person,
-                      size: 30,
-                      color: categoryColor,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          member['name'],
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          member['position'],
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const Divider(height: 1),
-              const SizedBox(height: 12),
-              
-              // Información detallada
-              Flexible(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _buildDetailRow('Categoría', widget.categoryName),
-                      _buildDetailRow('Horario', member['schedule']),
-                      _buildDetailRow('Teléfono', member['contact']['phone']),
-                      _buildDetailRow('Extensión', member['contact']['extension']),
-                      //_buildDetailRow('Email', member['contact']['email']),
-                    ],
-                  ),
-                ),
-              ),
-              
-              // Botón de cierre
-              const SizedBox(height: 16),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: categoryColor,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cerrar'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDetailRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 90,
-            child: Text(
-              '$label:',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[700],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 14),
-            ),
-          ),
-        ],
-      ),
-    ); 
-    */
   }
 }

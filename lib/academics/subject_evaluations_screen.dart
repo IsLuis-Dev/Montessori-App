@@ -1,25 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/academics/student_evaluation_screen.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/features/auth/presentation/screens/unauthorized_screen.dart';
-import 'package:prototipo_2/features/academics/data/models/academic_period_model.dart';
-import 'package:prototipo_2/features/academics/data/models/subject_model.dart';
-import 'package:prototipo_2/features/academics/data/repositories/firestore_academic_repository.dart';
-import 'package:prototipo_2/features/academics/presentation/controllers/academic_controller.dart';
-import 'package:prototipo_2/features/directory/data/models/student_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
-import 'package:prototipo_2/screens/teacher_group_screen.dart';
+import 'package:cintli_montessori/academics/student_evaluation_screen.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/features/auth/presentation/screens/unauthorized_screen.dart';
+import 'package:cintli_montessori/features/academics/data/models/academic_period_model.dart';
+import 'package:cintli_montessori/features/academics/data/models/subject_model.dart';
+import 'package:cintli_montessori/features/academics/data/repositories/firestore_academic_repository.dart';
+import 'package:cintli_montessori/features/academics/presentation/controllers/academic_controller.dart';
+import 'package:cintli_montessori/features/directory/data/models/student_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/screens/teacher_group_screen.dart';
 
+/// Lista estudiantes de una materia y periodo para el flujo de evaluación.
 class SubjectEvaluationsScreen extends StatefulWidget {
   const SubjectEvaluationsScreen({
     super.key,

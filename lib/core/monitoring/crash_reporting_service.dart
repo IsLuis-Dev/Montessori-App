@@ -3,6 +3,10 @@ import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
+/// Configura el reporte global de fallos fatales para Android `release`.
+///
+/// La recopilación permanece desactivada en depuración, web y plataformas aún
+/// no validadas. No deben agregarse datos personales a los reportes.
 class CrashReportingService {
   const CrashReportingService._();
 

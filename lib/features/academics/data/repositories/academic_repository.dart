@@ -1,6 +1,7 @@
 import '../models/academic_period_model.dart';
 import '../models/subject_model.dart';
 
+/// Contrato de lectura para materias y periodos académicos.
 abstract class AcademicRepository {
   Stream<List<SubjectModel>> watchSubjectsByGroup({
     required String schoolId,

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa un comunicado escolar, su audiencia y periodo de publicación.
 class NewsModel {
   const NewsModel({
     required this.id,

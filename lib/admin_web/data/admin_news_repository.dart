@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../features/directory/data/models/school_group_model.dart';
 import '../../features/news/data/models/news_model.dart';
 
+/// Administra comunicados y sincroniza las copias consultadas por audiencia.
 class AdminNewsRepository {
   AdminNewsRepository({
     FirebaseFirestore? firestore,

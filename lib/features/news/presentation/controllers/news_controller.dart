@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
 
 import '../../data/models/news_model.dart';
 import '../../data/repositories/news_repository.dart';
 
+/// Coordina audiencia, vigencia, imágenes y actualización de comunicados.
 class NewsController extends ChangeNotifier {
   NewsController({
     required NewsRepository repository,

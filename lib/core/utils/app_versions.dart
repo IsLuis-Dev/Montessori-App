@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:yaml/yaml.dart';
 
+/// Representa una versión semántica y su número opcional de compilación.
 class ReleaseVersion {
   const ReleaseVersion({required this.number, this.buildNumber});
 
@@ -27,6 +28,7 @@ class ReleaseVersion {
   }
 }
 
+/// Carga y valida versiones independientes declaradas en `pubspec.yaml`.
 abstract final class AppVersions {
   static const _adminWebKey = 'admin_web_version';
 

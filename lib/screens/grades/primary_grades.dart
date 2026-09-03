@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/screens/grades/group_report_cards_screen.dart';
+import 'package:cintli_montessori/screens/grades/group_report_cards_screen.dart';
 
+/// Adapta un grupo de primaria al flujo común de boletas.
 class PrimaryGradesScreen extends StatelessWidget {
   const PrimaryGradesScreen({
     super.key,

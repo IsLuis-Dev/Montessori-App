@@ -1,5 +1,6 @@
 import '../models/evaluation_model.dart';
 
+/// Contrato para observar, consultar y guardar evaluaciones académicas.
 abstract class EvaluationRepository {
   Stream<EvaluationModel?> watchEvaluation({
     required String schoolId,

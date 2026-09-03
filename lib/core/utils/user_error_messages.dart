@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 
+/// Convierte errores técnicos conocidos en mensajes seguros para el usuario.
+///
+/// El texto resultante no expone rutas, reglas, identificadores ni detalles de
+/// Firebase que puedan revelar información interna.
 String userFriendlyErrorMessage(
   Object error, {
   required String fallback,

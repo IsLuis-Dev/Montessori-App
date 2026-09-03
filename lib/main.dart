@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/config/app_feature_flags.dart';
-import 'package:prototipo_2/features/auth/data/repositories/firestore_current_user_repository.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/screens/calendar_screen.dart';
-import 'package:prototipo_2/people/teachers_screen.dart';
+import 'package:cintli_montessori/core/config/app_feature_flags.dart';
+import 'package:cintli_montessori/features/auth/data/repositories/firestore_current_user_repository.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/screens/calendar_screen.dart';
+import 'package:cintli_montessori/people/teachers_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/app_state.dart';
@@ -21,39 +19,14 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'core/config/firebase_options.dart';
 import 'screens/splash_screen.dart';
 import 'features/auth/presentation/screens/unauthorized_screen.dart';
-import 'core/theme/colors.dart'; // Manejo de colores personalizados
-import 'core/utils/app_info.dart'; // Información de la app (versión, build, etc.)
+import 'core/theme/colors.dart';
+import 'core/theme/theme_controller.dart';
+import 'core/utils/app_info.dart';
 import 'core/widgets/app_loading_skeleton.dart';
 import 'core/connectivity/network_status_controller.dart';
 import 'core/monitoring/crash_reporting_service.dart';
 import 'core/security/app_check_service.dart';
 
-// --------------------- CONTROL DE TEMA ---------------------
-// Clase que maneja el modo claro/oscuro usando Provider
-class ThemeNotifier extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.light;
-  final SharedPreferences _prefs;
-
-  ThemeNotifier(this._prefs) {
-    // Al iniciar, cargamos la preferencia guardada en SharedPreferences
-    _themeMode =
-        _prefs.getBool('darkMode') ?? false ? ThemeMode.dark : ThemeMode.light;
-  }
-
-  ThemeMode get themeMode => _themeMode;
-
-  // Cambiar tema dinámicamente y guardar en SharedPreferences
-  void toggleTheme(bool isDark) {
-    final nextMode = isDark ? ThemeMode.dark : ThemeMode.light;
-    if (_themeMode == nextMode) return;
-
-    _themeMode = nextMode;
-    notifyListeners();
-    unawaited(_prefs.setBool('darkMode', isDark));
-  }
-}
-
-// --------------------- MAIN ---------------------
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -71,12 +44,12 @@ void main() async {
   await CrashReportingService.initialize();
   final prefs = await preferencesFuture;
 
-  // MultiProvider: inyectamos estados globales (AppState y ThemeNotifier)
+  // Los controladores globales se crean una sola vez y se liberan con el árbol.
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppState()),
-        ChangeNotifierProvider(create: (context) => ThemeNotifier(prefs)),
+        ChangeNotifierProvider(create: (context) => ThemeController(prefs)),
         ChangeNotifierProvider(create: (context) => NetworkStatusController()),
         ChangeNotifierProvider(
           create:
@@ -90,20 +63,19 @@ void main() async {
   );
 }
 
-// --------------------- RAÍZ DE LA APP ---------------------
+/// Configura temas, rutas y la protección global de perfiles autenticados.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = context.select<ThemeNotifier, ThemeMode>(
+    final themeMode = context.select<ThemeController, ThemeMode>(
       (notifier) => notifier.themeMode,
     );
 
     return MaterialApp(
       title: 'Cintli Montessori',
 
-      // ---------- Tema claro ----------
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: AppColors.primaryBlue,
@@ -116,7 +88,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      // ---------- Tema oscuro ----------
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: AppColors.primaryBlue,
@@ -134,13 +105,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.brandBlueSurface,
           foregroundColor: Colors.white,
         ),
-
-        /*cardTheme: CardTheme(
-          color: Colors.grey[800],
-        ),*/
       ),
 
-      // Cambia dinámicamente según ThemeNotifier (modo claro/oscuro)
+      // El controlador conserva la preferencia entre ejecuciones.
       themeMode: themeMode,
 
       builder: (context, child) {
@@ -160,8 +127,8 @@ class MyApp extends StatelessWidget {
         }
 
         if (accessState.loading) {
-          // Preserve the current route while the live profile refreshes.
-          // Replacing the Navigator here remounts the splash and restarts it.
+          // Se conserva la ruta mientras se actualiza el perfil. Sustituir el
+          // Navigator volvería a montar el splash y reiniciaría su navegación.
           return child ?? const SizedBox.shrink();
         }
 
@@ -172,10 +139,8 @@ class MyApp extends StatelessWidget {
         return child ?? const SizedBox.shrink();
       },
 
-      // Pantalla inicial → SplashScreen
       initialRoute: '/splash',
 
-      // ---------- Rutas de la aplicación ----------
       routes: {
         '/splash': (context) => const SplashScreen(),
         '/': (context) => const LoginScreen(),
@@ -196,7 +161,6 @@ class MyApp extends StatelessWidget {
         '/settings': (context) => const AppAccessPage(child: SettingsScreen()),
       },
 
-      // ---------- Rutas especiales con permisos ----------
       onGenerateRoute: (settings) {
         if (settings.name == '/students') {
           return MaterialPageRoute(
@@ -210,14 +174,15 @@ class MyApp extends StatelessWidget {
           );
         }
 
-        return null; // Si no hay coincidencia, usa ruta por defecto
+        return null;
       },
 
-      debugShowCheckedModeBanner: false, // Oculta el banner de debug
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
+/// Protege una ruta que requiere una cuenta escolar activa.
 class AppAccessPage extends StatelessWidget {
   const AppAccessPage({super.key, required this.child});
 
@@ -241,6 +206,7 @@ class AppAccessPage extends StatelessWidget {
   }
 }
 
+/// Protege funciones móviles y respeta el alcance administrativo deshabilitado.
 class MobileFeaturePage extends StatelessWidget {
   const MobileFeaturePage({
     super.key,
@@ -279,6 +245,7 @@ class MobileFeaturePage extends StatelessWidget {
   }
 }
 
+/// Restringe rutas móviles reservadas a la administración habilitada.
 class AdminOnlyPage extends StatelessWidget {
   const AdminOnlyPage({super.key, required this.child});
 

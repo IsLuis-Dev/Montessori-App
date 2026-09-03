@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:prototipo_2/admin_web/presentation/theme/admin_theme.dart';
-import 'package:prototipo_2/admin_web/presentation/widgets/admin_time_selector.dart';
+import 'package:cintli_montessori/admin_web/presentation/theme/admin_theme.dart';
+import 'package:cintli_montessori/admin_web/presentation/widgets/admin_time_selector.dart';
 
 void main() {
   testWidgets('offers every hour and minute in styled dropdown menus', (

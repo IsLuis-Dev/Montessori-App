@@ -29,6 +29,7 @@ void _showCalendarToast(
   );
 }
 
+/// Superficie administrativa para crear, publicar y archivar eventos escolares.
 class AdminCalendarScreen extends StatefulWidget {
   const AdminCalendarScreen({super.key});
 
