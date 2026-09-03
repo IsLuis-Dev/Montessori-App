@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Describe un evento escolar, su vigencia y audiencia autorizada.
 class CalendarEventModel {
   const CalendarEventModel({
     required this.id,

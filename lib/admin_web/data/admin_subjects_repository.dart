@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../features/academics/data/models/subject_model.dart';
 import '../../features/directory/data/models/school_group_model.dart';
 
+/// Gestiona materias, orden académico y asociaciones con grupos.
 class AdminSubjectsRepository {
   AdminSubjectsRepository({
     FirebaseFirestore? firestore,

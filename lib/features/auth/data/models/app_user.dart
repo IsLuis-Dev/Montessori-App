@@ -1,3 +1,7 @@
+/// Representa el perfil escolar asociado a una cuenta autenticada.
+///
+/// El rol, estado y relaciones de este modelo determinan qué experiencia puede
+/// mostrar la aplicación, pero las reglas de Firebase conservan la autoridad.
 class AppUser {
   const AppUser({
     required this.uid,

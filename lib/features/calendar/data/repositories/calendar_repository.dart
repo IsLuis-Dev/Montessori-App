@@ -1,5 +1,6 @@
 import '../models/calendar_event_model.dart';
 
+/// Resume los grupos y estudiantes que puede consultar una cuenta.
 class CalendarUserAudience {
   const CalendarUserAudience({
     required this.canReadAll,
@@ -12,6 +13,7 @@ class CalendarUserAudience {
   final bool isAdmin;
 }
 
+/// Contrato para consultar y publicar eventos según su audiencia.
 abstract class CalendarRepository {
   Stream<List<CalendarEventModel>> watchPublishedEvents({
     required String schoolId,

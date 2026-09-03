@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 
+/// Barra superior reutilizable con navegación posterior o apertura del menú.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;

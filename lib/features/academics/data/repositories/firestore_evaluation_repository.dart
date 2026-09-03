@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/evaluation_model.dart';
 import 'evaluation_repository.dart';
 
+/// Persiste evaluaciones y mantiene observación en tiempo real con Firestore.
 class FirestoreEvaluationRepository implements EvaluationRepository {
   FirestoreEvaluationRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

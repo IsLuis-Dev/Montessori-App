@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/custom_drawer.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/news/data/models/news_model.dart';
-import 'package:prototipo_2/features/news/data/repositories/firestore_news_repository.dart';
-import 'package:prototipo_2/features/news/presentation/controllers/news_controller.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/custom_drawer.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/news/data/models/news_model.dart';
+import 'package:cintli_montessori/features/news/data/repositories/firestore_news_repository.dart';
+import 'package:cintli_montessori/features/news/presentation/controllers/news_controller.dart';
 
+/// Presenta los comunicados vigentes para la audiencia del perfil actual.
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 

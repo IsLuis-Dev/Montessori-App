@@ -28,6 +28,7 @@ void _showTeachersToast(
   );
 }
 
+/// Administra docentes, grupos asignados y estado de acceso.
 class AdminTeachersScreen extends StatefulWidget {
   const AdminTeachersScreen({super.key});
 

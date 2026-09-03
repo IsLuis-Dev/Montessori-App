@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
 
-// Pantalla inicial (Splash) que muestra animaciones antes de entrar al login
+/// Inicializa la experiencia visual y dirige la sesión a la ruta correcta.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -15,39 +14,34 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  // Controlador para animar el logo principal (desplazamiento hacia arriba)
   late AnimationController _logoSlideController;
   late Animation<Offset> _logoSlideAnimation;
 
-  // Controladores para animar cada letra de "Cintli"
   late List<AnimationController> _letterControllers;
 
-  // Controlador y animaciones para el texto "Montessori"
   late AnimationController _montessoriController;
   late Animation<double> _montessoriScale;
   late Animation<double> _montessoriOpacity;
 
-  final String _title = 'Cintli'; // Texto animado
-  bool _initialized = false; // Marca cuando Firebase está listo
-  bool _navigationTriggered =
-      false; // Evita que la navegación se ejecute dos veces
-  bool _showLoading = false; // Activa el indicador de "Cargando..."
+  static const String _title = 'Cintli';
+
+  bool _navigationTriggered = false;
+  bool _showLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _initializeAnimations(); // Configura todas las animaciones
-    _initializeApp(); // Inicializa Firebase y luego arranca las animaciones
+    _initializeAnimations();
+    _startLetterAnimations();
   }
 
-  // Configura todos los controladores de animaciones
+  /// Configura los controladores que forman la secuencia de entrada.
   void _initializeAnimations() {
     _logoSlideController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 550),
     );
 
-    // Genera un controlador por cada letra de "Cintli"
     _letterControllers = List.generate(_title.length, (index) {
       return AnimationController(
         vsync: this,
@@ -55,15 +49,13 @@ class _SplashScreenState extends State<SplashScreen>
       );
     });
 
-    // Animación de desplazamiento hacia arriba del logo
     _logoSlideAnimation = Tween<Offset>(
       begin: Offset.zero,
-      end: const Offset(0, -2.5), // Mueve el logo hacia arriba
+      end: const Offset(0, -2.5),
     ).animate(
       CurvedAnimation(parent: _logoSlideController, curve: Curves.easeInOut),
     );
 
-    // Animaciones para el texto "Montessori"
     _montessoriController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -78,38 +70,20 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  // Inicializa Firebase antes de arrancar la app
-  Future<void> _initializeApp() async {
-    try {
-      WidgetsFlutterBinding.ensureInitialized();
-      if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp();
-      }
-      if (!mounted) return;
-      setState(() => _initialized = true);
-      _startLetterAnimations(); // Una vez listo, inicia animaciones de letras
-    } catch (e) {
-      // Aquí se podría manejar un error de inicialización
-    }
-  }
-
-  // Reproduce en secuencia: letras -> Montessori -> loading -> logo arriba -> login
+  /// Reproduce la secuencia antes de resolver la ruta de la sesión.
   void _startLetterAnimations() {
     for (int i = 0; i < _letterControllers.length; i++) {
       Future.delayed(Duration(milliseconds: i * 100), () {
         if (!mounted) return;
-        _letterControllers[i].forward(); // Animamos cada letra una por una
+        _letterControllers[i].forward();
         if (i == _letterControllers.length - 1) {
-          // Cuando termina la última letra...
           Future.delayed(const Duration(milliseconds: 350), () {
             if (!mounted) return;
-            _montessoriController.forward(); // Muestra "Montessori"
+            _montessoriController.forward();
 
             Future.delayed(const Duration(milliseconds: 550), () {
               if (!mounted) return;
-              setState(() {
-                _showLoading = true; // Activa "Cargando..."
-              });
+              setState(() => _showLoading = true);
 
               Future.delayed(const Duration(milliseconds: 450), () {
                 if (!mounted) return;
@@ -124,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
-  // Decide una sola vez si entra al Home o regresa al login.
+  /// Dirige una sola vez a inicio o autenticación según el perfil vigente.
   Future<void> _navigateAfterProfileCheck() async {
     if (_navigationTriggered) return;
     _navigationTriggered = true;
@@ -157,7 +131,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
-    // Liberamos todos los controladores
     _logoSlideController.dispose();
     _montessoriController.dispose();
     for (final controller in _letterControllers) {
@@ -168,29 +141,20 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // Si Firebase aún no está listo, mostrar pantalla de carga
-    if (!_initialized) {
-      return const Scaffold(
-        backgroundColor: AppColors.brandBlueSurface,
-        body: Center(child: CircularProgressIndicator(color: Colors.white)),
-      );
-    }
-
     return Scaffold(
       backgroundColor: AppColors.brandBlueSurface,
       body: Center(
         child:
             _showLoading
-                ? _buildLoading() // Muestra "Cargando..."
+                ? _buildLoading()
                 : SlideTransition(
-                  position:
-                      _logoSlideAnimation, // Aplica animación de desplazamiento
+                  position: _logoSlideAnimation,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildAnimatedLogo(size: 130), // Letras "Cintli"
+                      _buildAnimatedLogo(size: 130),
                       const SizedBox(height: 10),
-                      _buildAnimatedMontessori(size: 130), // Texto "Montessori"
+                      _buildAnimatedMontessori(size: 130),
                     ],
                   ),
                 ),
@@ -198,7 +162,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  // Construye animación de cada letra de "Cintli"
+  /// Construye la marca con una animación independiente por letra.
   Widget _buildAnimatedLogo({required double size}) {
     List<String> letters = ['C', 'i', 'n', 't', 'l', 'i'];
     List<Color> colors = [
@@ -236,7 +200,7 @@ class _SplashScreenState extends State<SplashScreen>
                     fontFamily: 'LettersForLearners',
                     fontSize: size * 0.5,
                     fontWeight: FontWeight.bold,
-                    color: colors[index], // Cada letra con color diferente
+                    color: colors[index],
                   ),
                 ),
               ),
@@ -247,7 +211,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  // Construye animación de "Montessori" (aparece y crece)
+  /// Construye la segunda línea de la marca con escala y opacidad.
   Widget _buildAnimatedMontessori({required double size}) {
     return FadeTransition(
       opacity: _montessoriOpacity,
@@ -266,7 +230,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  // Widget de loading (Cargando...)
+  /// Presenta el estado breve mientras se resuelve el perfil escolar.
   Widget _buildLoading() {
     return const Column(
       mainAxisSize: MainAxisSize.min,

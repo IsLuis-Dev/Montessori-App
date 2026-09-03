@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/config/app_feature_flags.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/screens/teacher_group_screen.dart';
+import 'package:cintli_montessori/core/config/app_feature_flags.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/screens/teacher_group_screen.dart';
 import '../core/widgets/custom_app_bar.dart';
 import '../core/widgets/custom_drawer.dart';
 
+/// Construye el inicio y sus accesos según el rol del perfil vigente.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

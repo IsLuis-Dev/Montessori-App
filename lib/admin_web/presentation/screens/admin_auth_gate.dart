@@ -11,6 +11,9 @@ import '../../../features/auth/data/models/app_user.dart';
 import 'admin_login_screen.dart';
 import 'admin_shell_screen.dart';
 
+/// Permite el panel únicamente a sesiones con perfil administrativo activo.
+///
+/// La validación visual complementa, pero no sustituye, las reglas de Firebase.
 class AdminAuthGate extends StatelessWidget {
   const AdminAuthGate({super.key});
 

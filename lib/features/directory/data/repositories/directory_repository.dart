@@ -2,6 +2,7 @@ import '../models/school_group_model.dart';
 import '../models/student_model.dart';
 import '../models/teacher_model.dart';
 
+/// Contrato de consulta para grupos, estudiantes y docentes autorizados.
 abstract class DirectoryRepository {
   Stream<List<SchoolGroupModel>> watchGroups({required String schoolId});
 

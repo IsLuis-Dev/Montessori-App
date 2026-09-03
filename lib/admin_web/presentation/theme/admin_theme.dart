@@ -3,8 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/theme/colors.dart';
 
+/// Preferencias de apariencia disponibles para el panel administrativo.
 enum AdminThemePreference { system, light, dark }
 
+/// Conserva la preferencia visual del panel y notifica sus cambios.
 class AdminThemeController extends ChangeNotifier {
   AdminThemeController._(this._preference);
 
@@ -40,6 +42,7 @@ class AdminThemeController extends ChangeNotifier {
   }
 }
 
+/// Expone [AdminThemeController] al árbol sin acoplar widgets a su creación.
 class AdminThemeScope extends InheritedNotifier<AdminThemeController> {
   const AdminThemeScope({
     super.key,
@@ -57,6 +60,7 @@ class AdminThemeScope extends InheritedNotifier<AdminThemeController> {
   }
 }
 
+/// Colores semánticos adicionales utilizados por componentes administrativos.
 @immutable
 class AdminPalette extends ThemeExtension<AdminPalette> {
   const AdminPalette({
@@ -173,6 +177,7 @@ extension AdminThemeContext on BuildContext {
       Theme.of(this).extension<AdminPalette>() ?? AdminPalette.light;
 }
 
+/// Construye temas claro y oscuro consistentes para Flutter Web.
 class AdminThemeData {
   const AdminThemeData._();
 

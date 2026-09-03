@@ -9,6 +9,7 @@ import '../theme/app_icons.dart';
 import '../theme/colors.dart';
 import 'app_loading_skeleton.dart';
 
+/// Alterna entre contenido, carga y recuperación cuando cambia la conectividad.
 class NetworkAwareModule extends StatefulWidget {
   const NetworkAwareModule({
     super.key,

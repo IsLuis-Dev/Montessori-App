@@ -26,6 +26,7 @@ void _showGroupsToast(
   );
 }
 
+/// Administra el catálogo, orden y estado de los grupos escolares.
 class AdminGroupsScreen extends StatefulWidget {
   const AdminGroupsScreen({super.key});
 

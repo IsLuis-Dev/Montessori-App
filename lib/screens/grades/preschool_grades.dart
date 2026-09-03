@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/screens/grades/group_report_cards_screen.dart';
+import 'package:cintli_montessori/screens/grades/group_report_cards_screen.dart';
 
+/// Adapta una selección de preescolar al flujo común de boletas por grupo.
 class PreschoolGradesScreen extends StatelessWidget {
   const PreschoolGradesScreen({super.key, required this.gradeType});
 

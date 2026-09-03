@@ -28,6 +28,7 @@ void _showStudentsToast(
   );
 }
 
+/// Administra estudiantes, grupo asignado y estado del registro.
 class AdminStudentsScreen extends StatefulWidget {
   const AdminStudentsScreen({super.key});
 

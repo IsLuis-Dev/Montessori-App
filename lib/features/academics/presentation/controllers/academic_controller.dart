@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
 
 import '../../data/models/academic_period_model.dart';
 import '../../data/models/subject_model.dart';
 import '../../data/repositories/academic_repository.dart';
 
+/// Coordina materias y periodos académicos para las pantallas docentes.
 class AcademicController extends ChangeNotifier {
   AcademicController({
     required AcademicRepository repository,

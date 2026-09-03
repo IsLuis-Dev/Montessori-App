@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa la evaluación de un estudiante para una materia y periodo.
+///
+/// Su identificador compuesto evita duplicar la misma evaluación lógica.
 class EvaluationModel {
   const EvaluationModel({
     required this.id,

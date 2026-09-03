@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
 
 import '../../data/models/app_user.dart';
 import '../../data/repositories/current_user_repository.dart';
 
+/// Sincroniza Firebase Authentication con el perfil y acceso escolar vigente.
+///
+/// Cancela el perfil anterior cuando cambia la sesión para evitar que permisos
+/// de una cuenta permanezcan visibles durante una transición.
 class CurrentUserController extends ChangeNotifier {
   CurrentUserController({
     required CurrentUserRepository repository,

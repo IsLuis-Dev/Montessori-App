@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 void main() {

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Reduce texto de una sola línea cuando el ancho disponible es insuficiente.
+///
+/// Debe reservarse para etiquetas breves; el contenido extenso debe permitir
+/// saltos de línea para conservar legibilidad y accesibilidad.
 class AdaptiveSingleLineText extends StatelessWidget {
   const AdaptiveSingleLineText(
     this.text, {

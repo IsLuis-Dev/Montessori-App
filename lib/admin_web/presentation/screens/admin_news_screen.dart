@@ -29,6 +29,7 @@ void _showAdminToast(
   );
 }
 
+/// Administra comunicados, audiencia, vigencia e imágenes institucionales.
 class AdminNewsScreen extends StatefulWidget {
   const AdminNewsScreen({super.key});
 

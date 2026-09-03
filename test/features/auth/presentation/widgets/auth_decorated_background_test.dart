@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:prototipo_2/features/auth/presentation/widgets/auth_decorated_background.dart';
+import 'package:cintli_montessori/features/auth/presentation/widgets/auth_decorated_background.dart';
 
 void main() {
   testWidgets('respeta la preferencia de reducir movimiento', (tester) async {

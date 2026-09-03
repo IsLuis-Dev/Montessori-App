@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../features/directory/data/models/school_group_model.dart';
 import '../../features/directory/data/models/student_model.dart';
 
+/// Gestiona estudiantes y mantiene sus vínculos con familias autorizadas.
 class AdminStudentsRepository {
   AdminStudentsRepository({
     FirebaseFirestore? firestore,

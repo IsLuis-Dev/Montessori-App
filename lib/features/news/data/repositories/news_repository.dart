@@ -1,5 +1,6 @@
 import '../models/news_model.dart';
 
+/// Resume los grupos y estudiantes relacionados con una cuenta.
 class NewsUserAudience {
   const NewsUserAudience({
     required this.canReadAll,
@@ -12,6 +13,7 @@ class NewsUserAudience {
   final bool isAdmin;
 }
 
+/// Contrato para consultar y publicar comunicados por audiencia.
 abstract class NewsRepository {
   Stream<List<NewsModel>> watchPublishedNews({
     required String schoolId,

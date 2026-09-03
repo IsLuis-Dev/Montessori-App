@@ -1,20 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:prototipo_2/features/auth/presentation/screens/reset_password_screen.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/features/auth/presentation/widgets/auth_decorated_background.dart';
-import 'package:prototipo_2/screens/home_screen.dart';
+import 'package:cintli_montessori/features/auth/presentation/screens/reset_password_screen.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/features/auth/presentation/widgets/auth_decorated_background.dart';
+import 'package:cintli_montessori/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/widgets/app_logo.dart';
 import '../../../../core/widgets/app_loading_skeleton.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/connectivity/network_status_controller.dart';
 
-// Pantalla de inicio de sesión
+/// Autentica una cuenta y delega la autorización al perfil escolar observado.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -23,12 +23,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>(); // Llave para validar formulario
-  final _emailController = TextEditingController(); // Controlador para email
-  final _passwordController =
-      TextEditingController(); // Controlador para contraseña
-  final FirebaseAuth _auth =
-      FirebaseAuth.instance; // Instancia de Firebase Auth
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
   bool _isLoadingProfile = false;
   bool _obscurePassword = true;
@@ -52,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
         normalized.endsWith('@cintlimontessori.edu.mx');
   }
 
-  // Inicio de sesión con Firebase
   Future<void> _signInWithEmailAndPassword() async {
     if (!_validateFormWithTemporaryErrors()) return;
     if (_isLoading) return;
@@ -69,14 +66,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final String email = _emailController.text.trim();
-    final String password = _passwordController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
     setState(() => _isLoading = true);
     var navigatingToHome = false;
 
     try {
-      // Autenticación con Firebase
       final credential = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .timeout(const Duration(seconds: 15));
@@ -108,7 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      // Navega al Home si el login fue exitoso
       navigatingToHome = true;
       Navigator.of(context).pushReplacement<void, void>(
         PageRouteBuilder<void>(
@@ -127,7 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
         'Firebase Auth login error: code=${e.code}, message=${e.message}',
       );
 
-      // Manejo de errores comunes
       _showErrorSnackbar(_authErrorMessage(e));
     } on TimeoutException {
       if (!mounted) return;
@@ -159,11 +153,11 @@ class _LoginScreenState extends State<LoginScreen> {
       case 'user-not-found':
         return 'No encontramos una cuenta con ese correo$debugSuffix';
       case 'invalid-email':
-        return 'El correo ingresado no es valido$debugSuffix';
+        return 'El correo ingresado no es válido$debugSuffix';
       case 'user-disabled':
         return 'Esta cuenta fue deshabilitada por la escuela$debugSuffix';
       case 'too-many-requests':
-        return 'Demasiados intentos. Intenta mas tarde$debugSuffix';
+        return 'Demasiados intentos. Intenta más tarde$debugSuffix';
       case 'network-request-failed':
         return 'No se pudo conectar. Revisa tu internet$debugSuffix';
       case 'operation-not-allowed':
@@ -177,11 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
       case 'unknown':
         return 'Firebase no pudo procesar el inicio de sesión$debugSuffix';
       default:
-        return 'No se pudo iniciar sesion. Intenta nuevamente$debugSuffix';
+        return 'No se pudo iniciar sesión. Intenta nuevamente$debugSuffix';
     }
   }
 
-  // Función auxiliar para mostrar errores en SnackBar
   void _showErrorSnackbar(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(

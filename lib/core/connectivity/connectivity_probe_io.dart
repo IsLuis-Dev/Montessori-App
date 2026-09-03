@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+/// Verifica alcance a Firestore sin autenticar ni leer información escolar.
 Future<bool> probeInternetReachability() async {
   Socket? socket;
   try {

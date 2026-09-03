@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:prototipo_2/core/utils/app_versions.dart';
+import 'package:cintli_montessori/core/utils/app_versions.dart';
 
 void main() {
   group('ReleaseVersion', () {

@@ -8,6 +8,7 @@ import '../../../features/directory/data/models/school_group_model.dart';
 
 const String _closeGroupMenuValue = '__close_group_menu__';
 
+/// Selector reutilizable de grupos con validación y estados deshabilitados.
 class AdminGroupSelectField extends StatelessWidget {
   const AdminGroupSelectField({
     super.key,
@@ -237,6 +238,7 @@ class _GroupSelectMenuItem extends StatelessWidget {
   }
 }
 
+/// Solicita confirmación explícita antes de una eliminación administrativa.
 class AdminDeleteConfirmDialog extends StatefulWidget {
   const AdminDeleteConfirmDialog({
     super.key,
@@ -469,6 +471,7 @@ class _AdminDeleteConfirmDialogState extends State<AdminDeleteConfirmDialog> {
   }
 }
 
+/// Control semántico para activar o inactivar registros administrativos.
 class AdminStatusSwitch extends StatelessWidget {
   const AdminStatusSwitch({
     super.key,

@@ -1,20 +1,22 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
-import 'package:prototipo_2/core/config/app_feature_flags.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/config/app_feature_flags.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
 import 'package:provider/provider.dart';
 import '../theme/colors.dart';
 
-// Drawer (menú lateral) que se usa en toda la app
+/// Menú principal que filtra rutas según el perfil y las funciones habilitadas.
+///
+/// Esta visibilidad mejora la experiencia, pero la autorización definitiva se
+/// mantiene en las rutas protegidas y en las reglas de Firebase.
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Detecta si está en modo oscuro para adaptar colores
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final currentUser = context.watch<CurrentUserController>();
     final user = currentUser.user;
@@ -53,7 +55,6 @@ class CustomDrawer extends StatelessWidget {
           ),
           _buildSectionLabel('Principal', isDarkMode),
 
-          // --------- Opciones del menú ---------
           _buildDrawerItem(
             context,
             AppIcons.home,
@@ -90,7 +91,6 @@ class CustomDrawer extends StatelessWidget {
               isSelected: currentRoute == '/stats',
             ),
 
-          // Solo visible si el usuario es admin
           if (isAdmin) ...[
             _buildSectionLabel('Administración', isDarkMode),
             _buildDrawerItem(
@@ -111,7 +111,6 @@ class CustomDrawer extends StatelessWidget {
             ),
           ],
 
-          // Separador
           Divider(
             color: isDarkMode ? Colors.white12 : const Color(0xFFE5E7EB),
             thickness: 1,
@@ -120,7 +119,6 @@ class CustomDrawer extends StatelessWidget {
             endIndent: 16,
           ),
 
-          // Configuración
           _buildDrawerItem(
             context,
             AppIcons.settings,
@@ -281,7 +279,6 @@ class CustomDrawer extends StatelessWidget {
     return 'Usuario';
   }
 
-  // Método que construye cada opción del Drawer
   Widget _buildDrawerItem(
     BuildContext context,
     IconData icon,
@@ -309,7 +306,7 @@ class CustomDrawer extends StatelessWidget {
           letterSpacing: 0,
         ),
       ),
-      onTap: onTap, // Acción al hacer clic
+      onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       selected: isSelected,
       selectedTileColor: Colors.transparent,

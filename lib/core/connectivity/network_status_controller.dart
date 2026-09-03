@@ -5,6 +5,11 @@ import 'package:flutter/widgets.dart';
 
 import 'connectivity_probe.dart';
 
+/// Expone el estado de conexión verificado y detecta reconexiones.
+///
+/// El retraso al marcar modo sin conexión evita parpadeos por cambios breves de
+/// red. `onlineRevision` permite reconstruir módulos que deben reabrir streams
+/// después de recuperar conectividad.
 class NetworkStatusController extends ChangeNotifier
     with WidgetsBindingObserver {
   NetworkStatusController({

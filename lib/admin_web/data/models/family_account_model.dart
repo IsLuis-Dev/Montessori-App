@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa una cuenta familiar y sus estudiantes vinculados.
 class FamilyAccountModel {
   const FamilyAccountModel({
     required this.uid,

@@ -1,26 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/constants/app_constants.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/utils/user_error_messages.dart';
-import 'package:prototipo_2/core/widgets/custom_drawer.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/core/widgets/adaptive_single_line_text.dart';
-import 'package:prototipo_2/features/academics/data/models/academic_period_model.dart';
-import 'package:prototipo_2/features/academics/data/models/evaluation_model.dart';
-import 'package:prototipo_2/features/academics/data/models/subject_model.dart';
-import 'package:prototipo_2/features/academics/data/repositories/firestore_academic_repository.dart';
-import 'package:prototipo_2/features/academics/data/repositories/firestore_evaluation_repository.dart';
-import 'package:prototipo_2/features/auth/presentation/controllers/current_user_controller.dart';
-import 'package:prototipo_2/features/directory/data/models/school_group_model.dart';
-import 'package:prototipo_2/features/directory/data/models/student_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/core/constants/app_constants.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/utils/user_error_messages.dart';
+import 'package:cintli_montessori/core/widgets/custom_drawer.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/core/widgets/adaptive_single_line_text.dart';
+import 'package:cintli_montessori/features/academics/data/models/academic_period_model.dart';
+import 'package:cintli_montessori/features/academics/data/models/evaluation_model.dart';
+import 'package:cintli_montessori/features/academics/data/models/subject_model.dart';
+import 'package:cintli_montessori/features/academics/data/repositories/firestore_academic_repository.dart';
+import 'package:cintli_montessori/features/academics/data/repositories/firestore_evaluation_repository.dart';
+import 'package:cintli_montessori/features/auth/presentation/controllers/current_user_controller.dart';
+import 'package:cintli_montessori/features/directory/data/models/school_group_model.dart';
+import 'package:cintli_montessori/features/directory/data/models/student_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
 
+/// Calcula y presenta estadísticas académicas del estudiante autorizado.
 class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key});
 

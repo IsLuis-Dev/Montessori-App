@@ -4,6 +4,10 @@ import 'dart:async';
 import '../models/calendar_event_model.dart';
 import 'calendar_repository.dart';
 
+/// Resuelve eventos generales y copias por audiencia desde Cloud Firestore.
+///
+/// La combinación elimina duplicados porque un evento puede aparecer en más de
+/// una relación autorizada del mismo usuario.
 class FirestoreCalendarRepository implements CalendarRepository {
   FirestoreCalendarRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

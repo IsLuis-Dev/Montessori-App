@@ -3,6 +3,11 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+/// Crea una cuenta Auth mediante una instancia secundaria de Firebase.
+///
+/// La instancia secundaria impide que el administrador pierda su sesión cuando
+/// se registra una cuenta nueva. Este flujo es temporal hasta contar con un
+/// backend privilegiado; nunca debe recibir credenciales de servicio.
 class AdminAuthAccountProvisioner {
   const AdminAuthAccountProvisioner();
 
@@ -64,6 +69,7 @@ class AdminAuthAccountProvisioner {
   }
 }
 
+/// Conserva la cuenta creada y permite completar o revertir su aprovisionamiento.
 class ProvisionedAdminAccount {
   const ProvisionedAdminAccount({
     required this.app,

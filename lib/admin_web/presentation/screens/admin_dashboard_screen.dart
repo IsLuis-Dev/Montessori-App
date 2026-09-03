@@ -10,6 +10,7 @@ import '../theme/admin_theme.dart';
 import '../../../features/auth/data/models/app_user.dart';
 import '../../data/admin_dashboard_repository.dart';
 
+/// Resume indicadores y actividad reciente sin modificar información escolar.
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key, required this.user});
 

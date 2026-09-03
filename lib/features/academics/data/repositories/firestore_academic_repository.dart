@@ -4,6 +4,7 @@ import '../models/academic_period_model.dart';
 import '../models/subject_model.dart';
 import 'academic_repository.dart';
 
+/// Implementa el catálogo académico sobre colecciones de Cloud Firestore.
 class FirestoreAcademicRepository implements AcademicRepository {
   FirestoreAcademicRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

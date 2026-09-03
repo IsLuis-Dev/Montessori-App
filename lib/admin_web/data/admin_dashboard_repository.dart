@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../core/constants/app_constants.dart';
 
+/// Compone métricas operativas de solo lectura para el dashboard administrativo.
 class AdminDashboardRepository {
   AdminDashboardRepository({
     FirebaseFirestore? firestore,
@@ -181,6 +182,7 @@ class AdminDashboardRepository {
   }
 }
 
+/// Elemento normalizado de actividad reciente mostrado en el dashboard.
 class AdminActivityItem {
   const AdminActivityItem({
     required this.id,
@@ -197,6 +199,7 @@ class AdminActivityItem {
   final DateTime date;
 }
 
+/// Resultado de una métrica con valor actual y variación de referencia.
 class AdminMetricSnapshot {
   const AdminMetricSnapshot({required this.value, required this.total});
 

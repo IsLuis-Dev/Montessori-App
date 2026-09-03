@@ -7,6 +7,10 @@ import '../../features/directory/data/models/student_model.dart';
 import 'admin_auth_account_provisioner.dart';
 import 'models/family_account_model.dart';
 
+/// Gestiona cuentas familiares y vínculos autorizados con estudiantes.
+///
+/// Las actualizaciones deben conservar alineados `studentIds`, grupos derivados
+/// y el perfil de usuario utilizado por la aplicación móvil.
 class AdminFamiliesRepository {
   AdminFamiliesRepository({
     FirebaseFirestore? firestore,
@@ -232,6 +236,7 @@ class AdminFamiliesRepository {
   }
 }
 
+/// Resultado de crear el perfil familiar y su cuenta de acceso asociada.
 class FamilyCreationResult {
   const FamilyCreationResult.newAccount({required this.resetEmailSent})
     : linkedExistingAccount = false;

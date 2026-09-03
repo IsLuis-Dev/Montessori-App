@@ -2,6 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+/// Define puntos de quiebre y medidas compartidas de la aplicación móvil.
+///
+/// Centralizar estas reglas evita que cada pantalla responda de forma distinta
+/// ante teléfonos compactos, teléfonos amplios y tabletas.
 class ResponsiveLayout {
   const ResponsiveLayout._();
 

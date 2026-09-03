@@ -1,11 +1,18 @@
 # Política de seguridad
 
-## Alcance
+## Alcance y versión mantenida
 
 Este repositorio contiene una versión pública de portafolio de Cintli
 Montessori. El proyecto se encuentra en preproducción y gestiona dominios
 sensibles como autenticación, perfiles escolares, información académica y
 reglas de acceso de Firebase.
+
+La rama `main` representa la única línea mantenida de preproducción. Las ramas
+de trabajo y versiones anteriores pueden no recibir correcciones de seguridad.
+
+Este documento cubre código Flutter, automatizaciones de GitHub, reglas de
+Firebase y configuración pública del repositorio. No autoriza pruebas contra
+cuentas, dispositivos o proyectos Firebase ajenos.
 
 Se consideran especialmente relevantes los hallazgos relacionados con:
 
@@ -37,6 +44,15 @@ No adjuntes credenciales activas, exportaciones de Firebase ni información
 personal. Si el hallazgo involucra un secreto válido, indica solamente el tipo
 y la ubicación general para acordar un canal de manejo seguro.
 
+## Pruebas permitidas
+
+- Utiliza datos, cuentas y proyectos Firebase propios o expresamente
+  autorizados.
+- Detén la prueba si existe riesgo de acceder a información personal.
+- No realices denegación de servicio, ingeniería social ni automatizaciones que
+  degraden la disponibilidad.
+- No publiques una prueba de concepto antes de que exista una mitigación.
+
 ## Gestión del reporte
 
 El responsable del repositorio confirmará la recepción cuando sea posible,
@@ -44,7 +60,13 @@ evaluará alcance y severidad, y coordinará una divulgación responsable. No
 publiques detalles técnicos antes de que exista una mitigación o se acuerde una
 fecha de divulgación.
 
-## Versiones
+## Criterios de evaluación
 
-La rama `main` representa la línea vigente de preproducción. Las versiones o
-ramas anteriores pueden no recibir correcciones de seguridad.
+La evaluación considera impacto sobre confidencialidad, integridad,
+disponibilidad, alcance de usuarios y facilidad de explotación. Una corrección
+puede incluir código, reglas, revocación de credenciales o configuración del
+servicio afectado.
+
+La recepción de un reporte no garantiza recompensa económica. Se reconocerá la
+colaboración cuando sea apropiado y exista autorización de la persona que
+reportó el hallazgo.

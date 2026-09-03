@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:prototipo_2/core/layout/responsive_layout.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/custom_drawer.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/calendar/data/models/calendar_event_model.dart';
-import 'package:prototipo_2/features/calendar/data/repositories/firestore_calendar_repository.dart';
-import 'package:prototipo_2/features/calendar/presentation/controllers/calendar_controller.dart';
+import 'package:cintli_montessori/core/layout/responsive_layout.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/custom_drawer.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/calendar/data/models/calendar_event_model.dart';
+import 'package:cintli_montessori/features/calendar/data/repositories/firestore_calendar_repository.dart';
+import 'package:cintli_montessori/features/calendar/presentation/controllers/calendar_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+/// Presenta eventos visibles para la audiencia y el rango seleccionado.
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 

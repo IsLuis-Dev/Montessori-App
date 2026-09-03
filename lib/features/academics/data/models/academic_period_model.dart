@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Describe un periodo académico configurable y su vigencia.
 class AcademicPeriodModel {
   const AcademicPeriodModel({
     required this.id,

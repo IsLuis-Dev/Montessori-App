@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/app_user.dart';
 import 'current_user_repository.dart';
 
+/// Obtiene perfiles desde `schools/{schoolId}/users` en Cloud Firestore.
 class FirestoreCurrentUserRepository implements CurrentUserRepository {
   FirestoreCurrentUserRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

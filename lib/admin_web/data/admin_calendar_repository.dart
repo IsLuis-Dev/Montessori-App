@@ -4,6 +4,10 @@ import '../../core/constants/app_constants.dart';
 import '../../features/calendar/data/models/calendar_event_model.dart';
 import '../../features/directory/data/models/school_group_model.dart';
 
+/// Administra eventos y sincroniza sus copias de audiencia en Firestore.
+///
+/// Crear, actualizar o eliminar un evento implica mantener consistentes el
+/// documento principal y las colecciones consultadas por cada grupo.
 class AdminCalendarRepository {
   AdminCalendarRepository({
     FirebaseFirestore? firestore,

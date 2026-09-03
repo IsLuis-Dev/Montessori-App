@@ -7,6 +7,7 @@ import '../models/student_model.dart';
 import '../models/teacher_model.dart';
 import 'directory_repository.dart';
 
+/// Implementa consultas del directorio y conserva un orden estable de salida.
 class FirestoreDirectoryRepository implements DirectoryRepository {
   FirestoreDirectoryRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;

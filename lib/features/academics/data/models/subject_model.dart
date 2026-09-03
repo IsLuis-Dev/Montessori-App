@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Define una materia, su tipo de evaluación y los grupos relacionados.
 class SubjectModel {
   const SubjectModel({
     required this.id,

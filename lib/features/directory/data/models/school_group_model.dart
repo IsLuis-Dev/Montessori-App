@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Representa un grupo escolar y su configuración de presentación.
 class SchoolGroupModel {
   const SchoolGroupModel({
     required this.id,

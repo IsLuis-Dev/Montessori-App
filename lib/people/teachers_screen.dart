@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/custom_drawer.dart';
-import 'package:prototipo_2/core/widgets/app_loading_skeleton.dart';
-import 'package:prototipo_2/core/widgets/network_aware_module.dart';
-import 'package:prototipo_2/features/directory/data/models/school_group_model.dart';
-import 'package:prototipo_2/features/directory/data/models/teacher_model.dart';
-import 'package:prototipo_2/features/directory/data/repositories/firestore_directory_repository.dart';
-import 'package:prototipo_2/features/directory/presentation/controllers/directory_controller.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/custom_drawer.dart';
+import 'package:cintli_montessori/core/widgets/app_loading_skeleton.dart';
+import 'package:cintli_montessori/core/widgets/network_aware_module.dart';
+import 'package:cintli_montessori/features/directory/data/models/school_group_model.dart';
+import 'package:cintli_montessori/features/directory/data/models/teacher_model.dart';
+import 'package:cintli_montessori/features/directory/data/repositories/firestore_directory_repository.dart';
+import 'package:cintli_montessori/features/directory/presentation/controllers/directory_controller.dart';
 
+/// Presenta los grupos disponibles antes de consultar sus docentes.
 class TeachersScreen extends StatefulWidget {
   const TeachersScreen({super.key});
 
@@ -96,6 +97,7 @@ class _TeachersScreenState extends State<TeachersScreen> {
   }
 }
 
+/// Presenta docentes activos asociados con un grupo autorizado.
 class GroupTeachersScreen extends StatefulWidget {
   const GroupTeachersScreen({super.key, required this.group});
 

@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:prototipo_2/core/theme/app_icons.dart';
-import 'package:prototipo_2/core/theme/colors.dart';
-import 'package:prototipo_2/core/widgets/app_logo.dart';
-import 'package:prototipo_2/features/auth/presentation/widgets/auth_decorated_background.dart';
+import 'package:cintli_montessori/core/theme/app_icons.dart';
+import 'package:cintli_montessori/core/theme/colors.dart';
+import 'package:cintli_montessori/core/widgets/app_logo.dart';
+import 'package:cintli_montessori/features/auth/presentation/widgets/auth_decorated_background.dart';
 import 'package:provider/provider.dart';
-import 'package:prototipo_2/core/connectivity/network_status_controller.dart';
+import 'package:cintli_montessori/core/connectivity/network_status_controller.dart';
 
+/// Solicita a Firebase Auth el correo seguro de recuperación de contraseña.
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
 

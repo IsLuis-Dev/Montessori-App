@@ -4,6 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../layout/responsive_layout.dart';
 import '../theme/colors.dart';
 
+/// Variantes visuales utilizadas durante la carga inicial de cada módulo.
 enum AppSkeletonLayout {
   directory,
   academic,
@@ -13,6 +14,7 @@ enum AppSkeletonLayout {
   calendar,
 }
 
+/// Presenta una estructura de carga coherente con el módulo solicitado.
 class ModuleLoadingSkeleton extends StatelessWidget {
   const ModuleLoadingSkeleton({
     super.key,
@@ -327,6 +329,7 @@ class _StatisticsContentSkeleton extends StatelessWidget {
   }
 }
 
+/// Estado de carga genérico para rutas protegidas de la aplicación.
 class AppLoadingSkeleton extends StatelessWidget {
   const AppLoadingSkeleton({super.key});
 
@@ -353,6 +356,7 @@ class AppLoadingSkeleton extends StatelessWidget {
   }
 }
 
+/// Estado de carga que conserva la estructura visual de la pantalla de inicio.
 class HomeLoadingSkeleton extends StatelessWidget {
   const HomeLoadingSkeleton({super.key, this.isDarkMode});
 
